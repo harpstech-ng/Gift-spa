@@ -1,0 +1,3133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price List | Gift Beauty and Spa Zone</title>
+    <meta name="description" content="Explore our luxury spa menu. Build your spa day, save 10% on bundles, earn loyalty points, and book instantly via WhatsApp.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #070504;
+            --bg-card: #120F0D;
+            --bg-card-hover: #1E1813;
+            --gold: #FFD700;
+            --gold-light: #FFF2B2;
+            --gold-dark: #C5A059;
+            --gold-gradient: linear-gradient(135deg, #FFF2B2 0%, #FFD700 40%, #C5A059 80%, #997425 100%);
+            --white: #FFFFFF;
+            --text-muted: #C5BFBA;
+            --border-gold: rgba(255, 215, 0, 0.5);
+            --neon-glow: 0 0 25px rgba(255, 215, 0, 0.45);
+            --whatsapp: #25D366;
+            --danger: #ff3b5c;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 90px;
+            position: relative;
+        }
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+        ::selection { background: var(--gold); color: var(--bg-dark); }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        /* ═══════════════════ MESH GRADIENT BG ═══════════════════ */
+        .mesh-bg {
+            position: fixed; inset: 0;
+            z-index: -2;
+            overflow: hidden;
+            pointer-events: none;
+            opacity: 0.55;
+        }
+        .mesh-blob {
+            position: absolute;
+            width: 60vw; height: 60vw;
+            border-radius: 50%;
+            filter: blur(120px);
+            will-change: transform;
+        }
+        .mesh-blob-1 {
+            background: radial-gradient(circle, rgba(255,215,0,0.4), transparent 70%);
+            top: -20%; left: -20%;
+            animation: meshFloat1 22s ease-in-out infinite;
+        }
+        .mesh-blob-2 {
+            background: radial-gradient(circle, rgba(197,160,89,0.35), transparent 70%);
+            bottom: -20%; right: -20%;
+            animation: meshFloat2 26s ease-in-out infinite;
+        }
+        .mesh-blob-3 {
+            background: radial-gradient(circle, rgba(37,211,102,0.18), transparent 70%);
+            top: 40%; left: 30%;
+            animation: meshFloat3 30s ease-in-out infinite;
+        }
+        @keyframes meshFloat1 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(15vw,10vh) scale(1.2); }
+        }
+        @keyframes meshFloat2 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(-20vw,-15vh) scale(1.3); }
+        }
+        @keyframes meshFloat3 {
+            0%,100% { transform: translate(0,0) scale(1); }
+            50% { transform: translate(-10vw,20vh) scale(1.15); }
+        }
+
+        /* ═══════════════════ FLOATING ORBS ═══════════════════ */
+        .orbs-layer {
+            position: fixed; inset: 0;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, var(--gold-light), var(--gold-dark));
+            opacity: 0.15;
+            filter: blur(2px);
+            animation: orbFloat linear infinite;
+            box-shadow: 0 0 20px rgba(255,215,0,0.3);
+        }
+        @keyframes orbFloat {
+            0% { transform: translateY(100vh) translateX(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.15; }
+            90% { opacity: 0.15; }
+            100% { transform: translateY(-20vh) translateX(50px) rotate(360deg); opacity: 0; }
+        }
+
+        /* ═══════════════════ CURSOR GLOW ═══════════════════ */
+        .cursor-glow {
+            position: fixed;
+            top: 0; left: 0;
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255,215,0,0.12), transparent 65%);
+            pointer-events: none;
+            z-index: 9998;
+            transform: translate(-50%,-50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            will-change: transform;
+        }
+        .cursor-dot {
+            position: fixed;
+            top: 0; left: 0;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 12px var(--gold);
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%,-50%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        body.mouse-active .cursor-glow,
+        body.mouse-active .cursor-dot { opacity: 1; }
+
+        .sparkle-trail {
+            position: fixed;
+            width: 5px; height: 5px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 8px var(--gold);
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        /* ═══════════════════ SCROLL PROGRESS ═══════════════════ */
+        .scroll-progress {
+            position: fixed; top: 0; left: 0;
+            height: 3px; width: 0%;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 12px var(--gold);
+            z-index: 9999;
+            transition: width 0.1s linear;
+        }
+
+        .reveal { opacity: 0; transform: translateY(35px); transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* ═══════════════════ TICKER ═══════════════════ */
+        .promo-ticker {
+            background: var(--gold-gradient);
+            background-size: 200% 100%;
+            animation: tickerGradient 3s linear infinite;
+            color: var(--bg-dark);
+            font-size: 0.75rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            padding: 8px 0; white-space: nowrap;
+            overflow: hidden; position: fixed;
+            top: 0; width: 100%; z-index: 1003;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+        @keyframes tickerGradient {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 200% 50%; }
+        }
+        .ticker-track { display: inline-block; animation: tickerScroll 25s linear infinite; }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+        /* ═══════════════════ TOP BAR ═══════════════════ */
+        .top-bar {
+            background: rgba(10, 7, 5, 0.98);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 8px 5%;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            text-align: center;
+            position: fixed; top: 33px; width: 100%;
+            z-index: 1002;
+        }
+        .top-bar a { color: var(--gold); text-decoration: none; font-weight: 600; }
+        @media (min-width: 768px) {
+            .top-bar { text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        }
+
+        /* ═══════════════════ HEADER ═══════════════════ */
+        header {
+            position: fixed; top: 65px; width: 100%;
+            padding: 15px 5%; display: flex; justify-content: space-between;
+            align-items: center; z-index: 1000; transition: all 0.4s ease;
+            background: rgba(7, 5, 4, 0.9); backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        @media (max-width: 768px) { header { top: 68px; } }
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+        .logo-badge-img {
+            width: 44px; height: 44px; border-radius: 50%;
+            border: 2px solid var(--gold); object-fit: cover;
+            box-shadow: var(--neon-glow); animation: pulseAura 2s infinite alternate;
+        }
+        @keyframes pulseAura {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+        .logo-text {
+            font-family: 'Playfair Display', serif; font-weight: 700;
+            font-size: 1rem; color: var(--white); letter-spacing: 1px;
+            text-transform: uppercase; line-height: 1.2;
+        }
+        .logo-text span {
+            display: block; font-size: 0.65rem; color: var(--gold);
+            letter-spacing: 2px; font-family: 'Montserrat', sans-serif; font-weight: 600;
+        }
+        .hamburger-btn {
+            background: var(--bg-card); border: 2px solid var(--gold);
+            color: var(--gold); width: 44px; height: 44px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 1.2rem; cursor: pointer;
+            transition: all 0.3s ease; box-shadow: var(--neon-glow);
+        }
+        .hamburger-btn:hover { background: var(--gold); color: var(--bg-dark); transform: scale(1.1) rotate(90deg); }
+
+        .nav-dropdown {
+            position: absolute; top: 100%; right: 5%;
+            background: var(--bg-card); border: 2px solid var(--gold);
+            border-radius: 16px; width: 240px; padding: 15px 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.95);
+            display: none; flex-direction: column; z-index: 1005;
+            animation: dropdownFade 0.3s ease;
+        }
+        .nav-dropdown.active { display: flex; }
+        @keyframes dropdownFade { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .nav-dropdown a {
+            padding: 14px 22px; color: var(--white); text-decoration: none;
+            font-size: 0.9rem; font-weight: 600;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            transition: color 0.3s, background 0.3s, padding 0.3s;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .nav-dropdown a i { color: var(--gold); font-size: 0.85rem; }
+        .nav-dropdown a:last-child { border-bottom: none; }
+        .nav-dropdown a:hover { color: var(--bg-dark); background: var(--gold); padding-left: 30px; }
+
+        /* ═══════════════════ PAGE HEADER ═══════════════════ */
+        .page-header {
+            padding: 178px 20px 40px; text-align: center;
+            position: relative; overflow: hidden;
+            border-bottom: 1px solid var(--border-gold);
+        }
+        .sparkles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .sparkles span {
+            position: absolute; background: var(--gold); border-radius: 50%;
+            opacity: 0; box-shadow: 0 0 10px var(--gold);
+            animation: floatUp 7s ease-in-out infinite;
+        }
+        @keyframes floatUp {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.4); }
+            50% { opacity: 0.9; transform: translateY(-45px) scale(1); }
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 12px; font-style: italic;
+            background: linear-gradient(90deg, #C5A059, #FFF2B2, #FFD700, #FFF2B2, #C5A059);
+            background-size: 200% auto;
+            -webkit-background-clip: text; background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 4s linear infinite;
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.35));
+            min-height: 1.2em;
+        }
+        @keyframes shimmerText { to { background-position: 200% center; } }
+        .page-header p { font-size: 1rem; letter-spacing: 1px; color: var(--text-muted); max-width: 620px; margin: 0 auto; }
+        .gold-line { width: 90px; height: 3px; background: var(--gold); margin: 22px auto 0; box-shadow: 0 0 14px var(--gold); border-radius: 3px; }
+
+        .live-status {
+            display: inline-flex; align-items: center; gap: 10px;
+            margin-top: 26px; padding: 10px 22px; border-radius: 50px;
+            background: rgba(18, 15, 13, 0.85);
+            border: 1.5px solid rgba(37, 211, 102, 0.5);
+            font-size: 0.72rem; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #b6ffb6;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 25px rgba(37, 211, 102, 0.25);
+        }
+        .live-dot {
+            width: 10px; height: 10px; border-radius: 50%;
+            background: #25D366;
+            box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7);
+            animation: livePulse 1.8s infinite;
+        }
+        @keyframes livePulse {
+            0% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.7); }
+            70% { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+        }
+
+        /* ═══════════════════ COUNTDOWN PROMO ═══════════════════ */
+        .promo-countdown {
+            max-width: 700px;
+            margin: 30px auto 0;
+            padding: 16px 24px;
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(197,160,89,0.05));
+            border: 1.5px solid var(--gold);
+            border-radius: 18px;
+            box-shadow: 0 0 30px rgba(255,215,0,0.25), inset 0 0 30px rgba(255,215,0,0.05);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .promo-countdown::before {
+            content: '';
+            position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.15), transparent);
+            animation: promoShine 3s ease-in-out infinite;
+        }
+        @keyframes promoShine { to { left: 100%; } }
+
+        .promo-countdown .promo-icon {
+            width: 42px; height: 42px; border-radius: 50%;
+            background: var(--gold-gradient);
+            color: var(--bg-dark);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem; flex-shrink: 0;
+            animation: promoPulse 2s ease-in-out infinite;
+        }
+        @keyframes promoPulse {
+            0%,100% { box-shadow: 0 0 10px rgba(255,215,0,0.5); }
+            50% { box-shadow: 0 0 30px rgba(255,215,0,1); }
+        }
+        .promo-text-wrap { text-align: left; flex: 1; min-width: 180px; }
+        .promo-label { font-size: 0.65rem; letter-spacing: 2px; color: var(--gold-light); font-weight: 700; text-transform: uppercase; }
+        .promo-main { font-family: 'Playfair Display', serif; font-size: 0.95rem; color: var(--white); font-style: italic; }
+        .promo-main b { color: var(--gold); font-style: normal; }
+
+        .countdown-display {
+            display: flex;
+            gap: 6px;
+        }
+        .countdown-unit {
+            background: rgba(7,5,4,0.8);
+            border: 1px solid rgba(255,215,0,0.35);
+            border-radius: 8px;
+            padding: 6px 10px;
+            min-width: 44px;
+            text-align: center;
+        }
+        .countdown-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--gold);
+            display: block;
+            line-height: 1;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
+        }
+        .countdown-label {
+            font-size: 0.5rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        @media (max-width: 500px) {
+            .promo-countdown { padding: 14px 16px; gap: 10px; }
+            .promo-text-wrap { text-align: center; }
+            .countdown-unit { min-width: 36px; padding: 5px 6px; }
+            .countdown-value { font-size: 0.95rem; }
+        }
+
+        /* ═══════════════════ STATS ═══════════════════ */
+        .stats-row {
+            max-width: 1100px; margin: 40px auto 0; padding: 0 20px;
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 16px; position: relative; z-index: 5;
+        }
+        .stat-card {
+            background: var(--bg-card); border: 1.5px solid var(--border-gold);
+            border-radius: 20px; padding: 22px 14px; text-align: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            transition: all 0.4s cubic-bezier(0.34,1.4,0.5,1);
+            position: relative; overflow: hidden;
+        }
+        .stat-card::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(60deg, transparent 40%, rgba(255, 215, 0, 0.12) 50%, transparent 60%);
+            transform: rotate(30deg) translateX(-100%);
+            transition: transform 0.8s ease; pointer-events: none;
+        }
+        .stat-card:hover::before { transform: rotate(30deg) translateX(100%); }
+        .stat-card:hover { border-color: var(--gold); transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,0.75), var(--neon-glow); }
+        .stat-card i { font-size: 1.5rem; color: var(--gold); margin-bottom: 8px; display: block; }
+        .stat-num {
+            font-family: 'Playfair Display', serif; font-size: 1.9rem;
+            font-weight: 700; color: var(--gold-light);
+            line-height: 1; display: inline-block;
+        }
+        .stat-label {
+            display: block; font-size: 0.64rem; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--text-muted);
+            margin-top: 6px; font-weight: 600;
+        }
+
+        /* ═══════════════════ TOOLBAR ═══════════════════ */
+        .toolbar-wrap {
+            max-width: 1180px;
+            margin: 50px auto 0;
+            padding: 0 20px;
+        }
+        .toolbar {
+            background: var(--bg-card);
+            border: 1.5px solid var(--border-gold);
+            border-radius: 22px;
+            padding: 16px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            align-items: center;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+        }
+
+        .search-box {
+            position: relative;
+            flex: 1;
+            min-width: 220px;
+        }
+        .search-box i.search-icon {
+            position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+            color: var(--gold); font-size: 0.9rem; pointer-events: none;
+        }
+        .search-box input {
+            width: 100%; padding: 13px 50px 13px 46px;
+            background: var(--bg-dark);
+            border: 1.5px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-box input::placeholder { color: rgba(197, 191, 186, 0.5); }
+        .search-box input:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.12), 0 0 20px rgba(255,215,0,0.3);
+        }
+        .search-clear {
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            width: 30px; height: 30px; border-radius: 50%;
+            background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.35);
+            color: var(--gold); display: none; align-items: center; justify-content: center;
+            cursor: pointer; font-size: 0.78rem; transition: all 0.3s ease;
+        }
+        .search-clear.show { display: flex; }
+        .search-clear:hover { background: var(--gold); color: var(--bg-dark); }
+
+        .kbd-hint {
+            position: absolute; right: 48px; top: 50%; transform: translateY(-50%);
+            font-size: 0.6rem;
+            color: var(--text-muted);
+            padding: 3px 8px;
+            border: 1px solid rgba(255,215,0,0.25);
+            border-radius: 6px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        @media (max-width: 600px) { .kbd-hint { display: none; } }
+
+        .toolbar-select {
+            padding: 13px 18px;
+            background: var(--bg-dark);
+            border: 1.5px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.82rem;
+            font-weight: 600;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .toolbar-select:focus { border-color: var(--gold); }
+        .toolbar-select option { background: var(--bg-dark); }
+
+        .wishlist-toggle {
+            background: var(--bg-dark);
+            border: 1.5px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            padding: 12px 20px;
+            color: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .wishlist-toggle:hover { border-color: var(--gold); background: rgba(255,215,0,0.08); }
+        .wishlist-toggle.active { background: var(--gold); color: var(--bg-dark); border-color: var(--gold); }
+        .wishlist-toggle i { color: var(--danger); }
+        .wishlist-toggle.active i { color: var(--bg-dark); }
+        .wishlist-badge {
+            background: var(--danger);
+            color: white;
+            font-size: 0.6rem;
+            font-weight: 700;
+            min-width: 18px; height: 18px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 0 4px;
+        }
+        .wishlist-badge.show { display: flex; }
+
+        .price-slider-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 18px;
+            background: var(--bg-dark);
+            border: 1.5px solid rgba(255,215,0,0.3);
+            border-radius: 50px;
+            flex: 1;
+            min-width: 220px;
+        }
+        .price-slider-wrap i { color: var(--gold); font-size: 0.85rem; }
+        .price-slider {
+            -webkit-appearance: none;
+            appearance: none;
+            flex: 1;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold) 0%, var(--gold) var(--slider-fill, 100%), rgba(255,215,0,0.2) var(--slider-fill, 100%), rgba(255,215,0,0.2) 100%);
+            border-radius: 3px;
+            outline: none;
+            cursor: pointer;
+        }
+        .price-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--gold-gradient);
+            border: 2px solid var(--bg-dark);
+            box-shadow: 0 0 15px var(--gold);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .price-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .price-slider::-moz-range-thumb {
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--bg-dark);
+            box-shadow: 0 0 15px var(--gold);
+            cursor: pointer;
+        }
+        .price-slider-value {
+            font-size: 0.72rem;
+            color: var(--gold-light);
+            font-weight: 700;
+            min-width: 90px;
+            text-align: right;
+            white-space: nowrap;
+        }
+        @media (max-width: 500px) {
+            .price-slider-wrap { min-width: 100%; }
+            .price-slider-value { min-width: 70px; font-size: 0.65rem; }
+        }
+
+        .lucky-btn {
+            background: linear-gradient(135deg, rgba(255,215,0,0.15), rgba(197,160,89,0.08));
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.4s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        .lucky-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            transform: scale(1.05) rotate(-3deg);
+            box-shadow: 0 0 30px rgba(255,215,0,0.6);
+        }
+        .lucky-btn i { animation: diceSpin 4s linear infinite; }
+        @keyframes diceSpin {
+            0%,100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+
+        /* ═══════════════════ CATEGORY NAV ═══════════════════ */
+        .category-nav-wrap {
+            position: sticky; top: 130px; z-index: 900;
+            background: rgba(7, 5, 4, 0.95);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 12px 0;
+            margin-top: 30px;
+        }
+        @media (max-width: 768px) { .category-nav-wrap { top: 128px; } }
+        .category-nav {
+            display: flex; overflow-x: auto; gap: 10px;
+            padding: 0 5%; scrollbar-width: none;
+        }
+        .category-nav::-webkit-scrollbar { display: none; }
+        .category-nav a {
+            text-decoration: none; color: var(--white);
+            font-size: 0.72rem; font-weight: 700;
+            padding: 10px 20px; border-radius: 30px;
+            border: 2px solid var(--border-gold);
+            background: var(--bg-card);
+            text-transform: uppercase; letter-spacing: 1px;
+            white-space: nowrap; transition: all 0.3s;
+            display: inline-flex; align-items: center; gap: 8px;
+            position: relative;
+        }
+        .category-nav a i { font-size: 0.8rem; color: var(--gold); transition: color 0.3s; }
+        .category-nav a:hover, .category-nav a.active {
+            background: var(--gold); color: var(--bg-dark);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.5);
+            transform: translateY(-2px);
+        }
+        .category-nav a:hover i, .category-nav a.active i { color: var(--bg-dark); }
+
+        /* ═══════════════════ MENU ═══════════════════ */
+        .menu-container { max-width: 1180px; margin: 0 auto; padding: 50px 5% 80px; }
+        .category-section { margin-bottom: 60px; scroll-margin-top: 200px; }
+        .category-section.hide { display: none; }
+        .section-title {
+            font-size: 1.8rem; display: flex; align-items: center;
+            gap: 14px; margin-bottom: 25px; color: var(--gold-light);
+            border-bottom: 2px solid var(--border-gold);
+            padding-bottom: 12px; position: relative;
+        }
+        .section-title::after {
+            content: ''; position: absolute; bottom: -2px; left: 0;
+            width: 80px; height: 2px; background: var(--gold);
+            box-shadow: 0 0 12px var(--gold);
+        }
+        .section-title i { color: var(--gold); font-size: 1.5rem; text-shadow: 0 0 10px var(--gold); }
+        .section-count {
+            margin-left: auto;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            font-weight: 700;
+            padding: 5px 12px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+        }
+
+        .items-grid { display: grid; grid-template-columns: 1fr; gap: 14px; }
+        @media(min-width: 768px) { .items-grid { grid-template-columns: 1fr 1fr; gap: 16px; } }
+
+        /* ═══════════════════ PRICE CARD ═══════════════════ */
+        .price-card {
+            display: flex; align-items: center; gap: 12px;
+            padding: 16px 18px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-gold);
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: all 0.4s cubic-bezier(0.34,1.4,0.5,1);
+            position: relative;
+            overflow: hidden;
+            will-change: transform;
+        }
+        .price-card::after {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: linear-gradient(60deg, transparent 40%, rgba(255, 215, 0, 0.15) 50%, transparent 60%);
+            transform: rotate(30deg) translateX(-100%);
+            transition: transform 0.7s ease;
+            pointer-events: none;
+        }
+        .price-card:hover::after { transform: rotate(30deg) translateX(100%); }
+        .price-card:hover {
+            border-color: var(--gold);
+            background: var(--bg-card-hover);
+            box-shadow: 0 20px 55px rgba(0,0,0,0.85), 0 0 40px rgba(255,215,0,0.35);
+        }
+        .price-card.hide { display: none; }
+        .price-card.in-bag { border-color: var(--gold); box-shadow: 0 0 22px rgba(255,215,0,0.4); }
+        .price-card.favorited { border-color: var(--danger); }
+        .price-card.favorited::before {
+            content: ''; position: absolute;
+            top: 0; left: 0; width: 40px; height: 40px;
+            background: linear-gradient(135deg, var(--danger), transparent 70%);
+            opacity: 0.4;
+            pointer-events: none;
+        }
+        .price-card.shake { animation: shakeCard 0.5s ease; }
+        @keyframes shakeCard {
+            0%,100% { transform: translateX(0); }
+            20% { transform: translateX(-6px) rotate(-1deg); }
+            40% { transform: translateX(6px) rotate(1deg); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+        .price-card.glow-pulse { animation: glowPulse 1.5s ease; }
+        @keyframes glowPulse {
+            0%,100% { box-shadow: 0 0 0 rgba(255,215,0,0); }
+            50% { box-shadow: 0 0 40px rgba(255,215,0,0.8); }
+        }
+
+        .row-main { flex: 1; min-width: 0; }
+        .item-name {
+            font-weight: 600; font-size: 0.95rem;
+            color: var(--white); display: block; line-height: 1.3;
+        }
+        .item-tags { display: flex; gap: 6px; margin-top: 5px; flex-wrap: wrap; }
+        .tag {
+            font-size: 0.55rem; font-weight: 700;
+            letter-spacing: 1px; text-transform: uppercase;
+            padding: 2px 8px; border-radius: 20px;
+            display: inline-flex; align-items: center; gap: 3px;
+        }
+        .tag-popular { background: rgba(255, 90, 90, 0.15); color: #ff8a8a; border: 1px solid rgba(255, 90, 90, 0.4); }
+        .tag-luxury { background: rgba(255, 215, 0, 0.12); color: var(--gold); border: 1px solid rgba(255, 215, 0, 0.45); }
+        .tag-deal { background: rgba(37, 211, 102, 0.15); color: #6fff9f; border: 1px solid rgba(37, 211, 102, 0.4); }
+
+        .item-price {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700; color: var(--gold);
+            font-size: 1.1rem;
+            text-shadow: 0 0 10px rgba(255,215,0,0.3);
+            white-space: nowrap; flex-shrink: 0;
+            position: relative;
+        }
+        .item-price.ask { font-size: 0.82rem; color: var(--gold-light); font-family: 'Montserrat', sans-serif; font-weight: 700; letter-spacing: 1px; }
+        .price-card:hover .item-price {
+            animation: priceGlitch 0.3s ease;
+        }
+        @keyframes priceGlitch {
+            0% { transform: translate(0); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+            25% { transform: translate(-1px, 1px); text-shadow: -1px 0 #ff0055, 1px 0 #00ffe0, 0 0 10px rgba(255,215,0,0.3); }
+            50% { transform: translate(1px, -1px); text-shadow: 1px 0 #ff0055, -1px 0 #00ffe0, 0 0 10px rgba(255,215,0,0.3); }
+            100% { transform: translate(0); text-shadow: 0 0 10px rgba(255,215,0,0.3); }
+        }
+
+        .row-actions { display: flex; gap: 6px; flex-shrink: 0; align-items: center; }
+        .icon-btn {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            text-decoration: none; font-size: 0.85rem;
+            transition: all 0.3s cubic-bezier(0.34,1.4,0.5,1);
+            cursor: pointer;
+            border: 1.5px solid var(--gold);
+            background: rgba(255, 215, 0, 0.08);
+            color: var(--gold);
+            position: relative;
+            overflow: hidden;
+        }
+        .icon-btn:hover { background: var(--gold); color: var(--bg-dark); transform: scale(1.15) rotate(90deg); box-shadow: var(--neon-glow); }
+        .icon-btn.in-bag {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 18px rgba(255,215,0,0.65);
+        }
+        .icon-btn.in-bag i { animation: checkPop 0.4s ease; }
+        @keyframes checkPop {
+            0% { transform: scale(0.5); }
+            60% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+        .icon-btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none !important; }
+
+        .icon-btn.book-btn { background: var(--bg-dark); color: var(--gold); }
+        .icon-btn.book-btn:hover { background: var(--gold); color: var(--bg-dark); }
+        .icon-btn.heart-btn { border-color: rgba(255, 90, 90, 0.5); background: rgba(255, 90, 90, 0.08); color: #ff8a8a; }
+        .icon-btn.heart-btn:hover { background: var(--danger); color: white; border-color: var(--danger); }
+        .icon-btn.heart-btn.active { background: var(--danger); color: white; border-color: var(--danger); box-shadow: 0 0 20px rgba(255,59,92,0.6); }
+        .icon-btn.heart-btn.active i { animation: heartBeat 0.5s ease; }
+        @keyframes heartBeat {
+            0%,100% { transform: scale(1); }
+            25% { transform: scale(1.4); }
+            50% { transform: scale(0.9); }
+            75% { transform: scale(1.2); }
+        }
+        .icon-btn.view-btn { border-color: rgba(255,215,0,0.4); color: var(--gold-light); }
+        .icon-btn.view-btn:hover { background: var(--gold-light); color: var(--bg-dark); }
+
+        /* ═══════════════════ NO RESULTS ═══════════════════ */
+        .no-results {
+            text-align: center; padding: 80px 20px;
+            display: none;
+        }
+        .no-results.show { display: block; }
+        .no-results i { font-size: 3rem; color: var(--gold); opacity: 0.5; margin-bottom: 16px; display: block; }
+        .no-results p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 6px; }
+        .no-results small { color: var(--text-muted); opacity: 0.6; font-size: 0.78rem; display: block; margin-bottom: 20px; }
+        .no-results button {
+            padding: 12px 28px;
+            background: transparent; border: 1.5px solid var(--gold);
+            color: var(--gold); border-radius: 50px; cursor: pointer;
+            font-family: 'Montserrat', sans-serif; font-weight: 700;
+            font-size: 0.75rem; letter-spacing: 1px; text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .no-results button:hover { background: var(--gold); color: var(--bg-dark); }
+
+        /* ═══════════════════ BOTTOM BAR ═══════════════════ */
+        .bottom-bar {
+            position: fixed; bottom: 0; left: 0;
+            width: 100%; height: 80px;
+            background: rgba(7, 5, 4, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex; justify-content: space-around; align-items: center;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.9);
+            z-index: 2000; border-top: 2px solid var(--border-gold);
+            padding: 0 15px;
+        }
+        .bottom-bar a {
+            text-decoration: none; color: var(--text-muted);
+            display: flex; flex-direction: column; align-items: center;
+            font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .bottom-bar a i { font-size: 1.3rem; margin-bottom: 4px; color: var(--gold); }
+        .bottom-bar a:hover { color: var(--gold); transform: translateY(-3px); }
+        .bottom-book-btn {
+            background: var(--gold-gradient) !important;
+            color: var(--bg-dark) !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            flex-direction: row !important;
+            gap: 10px !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+            animation: bookPulse 2.2s ease-in-out infinite;
+        }
+        @keyframes bookPulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255,215,0,0.45); }
+            50% { box-shadow: 0 5px 34px rgba(255,215,0,0.9); }
+        }
+        .bottom-book-btn i { color: var(--bg-dark) !important; margin-bottom: 0 !important; font-size: 1.1rem !important; }
+
+        /* ═══════════════════ FLOATING ═══════════════════ */
+        .floating-wa {
+            position: fixed; bottom: 100px; right: 20px;
+            width: 58px; height: 58px;
+            border-radius: 50%;
+            background: var(--whatsapp); color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.6rem; text-decoration: none;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+            z-index: 1900; transition: all 0.3s ease;
+            animation: waFloat 3s ease-in-out infinite;
+        }
+        @keyframes waFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .floating-wa::after {
+            content: ''; position: absolute; inset: -4px;
+            border-radius: 50%;
+            border: 2px solid rgba(37, 211, 102, 0.4);
+            animation: waRipple 2s ease-out infinite;
+        }
+        @keyframes waRipple {
+            0% { transform: scale(0.9); opacity: 1; }
+            100% { transform: scale(1.6); opacity: 0; }
+        }
+        .floating-wa:hover { transform: scale(1.12) rotate(10deg); }
+
+        .spa-bag-pill {
+            position: fixed; left: 20px; bottom: 90px;
+            background: var(--gold-gradient); color: var(--bg-dark);
+            padding: 12px 22px 12px 16px;
+            border-radius: 50px;
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; font-size: 0.78rem;
+            letter-spacing: 0.5px;
+            cursor: pointer; z-index: 1900;
+            box-shadow: 0 8px 30px rgba(255, 215, 0, 0.6);
+            transform: translateY(150px); opacity: 0;
+            transition: all 0.5s cubic-bezier(0.34,1.4,0.5,1);
+            border: none;
+        }
+        .spa-bag-pill.show { transform: translateY(0); opacity: 1; }
+        .spa-bag-pill:hover { transform: translateY(-4px) scale(1.04); }
+        .bag-icon-wrap {
+            position: relative; width: 32px; height: 32px;
+            background: var(--bg-dark); color: var(--gold);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.9rem;
+        }
+        .bag-count {
+            position: absolute; top: -4px; right: -4px;
+            background: var(--danger); color: white;
+            font-size: 0.55rem; font-weight: 700;
+            min-width: 16px; height: 16px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            padding: 0 4px;
+            border: 1.5px solid var(--gold);
+        }
+        .bag-pill-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.15; }
+        .bag-pill-label { font-size: 0.55rem; letter-spacing: 1.5px; opacity: 0.75; text-transform: uppercase; }
+        .bag-pill-total { font-size: 0.85rem; font-family: 'Playfair Display', serif; }
+
+        @media (max-width: 640px) {
+            .floating-wa { bottom: 96px; right: 14px; width: 52px; height: 52px; font-size: 1.4rem; }
+            .spa-bag-pill { left: 14px; bottom: 96px; padding: 10px 18px 10px 12px; font-size: 0.72rem; }
+            .bag-icon-wrap { width: 28px; height: 28px; font-size: 0.8rem; }
+            .bag-pill-total { font-size: 0.78rem; }
+        }
+
+        /* ═══════════════════ MODAL BASE ═══════════════════ */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(3, 2, 1, 0.95);
+            backdrop-filter: blur(14px);
+            z-index: 5000;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            display: flex; align-items: flex-end; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.open { opacity: 1; visibility: visible; }
+        .modal-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 28px 28px 22px 22px;
+            width: 100%; max-width: 560px;
+            max-height: 88vh;
+            display: flex; flex-direction: column;
+            box-shadow: 0 0 80px rgba(255,215,0,0.4), 0 30px 80px rgba(0,0,0,0.95);
+            transform: translateY(50px);
+            transition: transform 0.5s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        .modal-overlay.open .modal-panel { transform: translateY(0); }
+
+        .modal-header {
+            padding: 22px 24px 16px;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+            display: flex; align-items: center; justify-content: space-between;
+            gap: 12px;
+        }
+        .modal-title {
+            display: flex; align-items: center; gap: 12px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.35rem; color: var(--gold-light);
+            font-style: italic;
+        }
+        .modal-title i { color: var(--gold); }
+        .modal-close {
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid rgba(255, 215, 0, 0.35);
+            color: var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .modal-close:hover { background: var(--gold); color: var(--bg-dark); transform: rotate(90deg); }
+
+        .modal-body {
+            padding: 18px 20px;
+            overflow-y: auto;
+            flex: 1; min-height: 100px;
+        }
+        .modal-body::-webkit-scrollbar { width: 4px; }
+        .modal-body::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+
+        .cart-empty { text-align: center; padding: 40px 20px; color: var(--text-muted); }
+        .cart-empty i { font-size: 2.4rem; color: var(--gold); opacity: 0.4; display: block; margin-bottom: 14px; }
+        .cart-empty p { font-size: 0.88rem; }
+        .cart-empty span { display: block; font-size: 0.72rem; margin-top: 6px; opacity: 0.7; }
+
+        .cart-item {
+            display: flex; align-items: center; gap: 12px;
+            padding: 12px 14px;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 215, 0, 0.25);
+            border-radius: 14px;
+            margin-bottom: 10px;
+            animation: cartItemIn 0.4s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        @keyframes cartItemIn {
+            from { opacity: 0; transform: translateX(-15px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .cart-item-info { flex: 1; min-width: 0; }
+        .cart-item-name {
+            font-size: 0.85rem; font-weight: 600; color: var(--white);
+            display: block; margin-bottom: 2px;
+            overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+        }
+        .cart-item-price { font-size: 0.78rem; color: var(--gold); font-weight: 700; font-family: 'Playfair Display', serif; }
+        .qty-controls {
+            display: flex; align-items: center; gap: 4px;
+            background: rgba(255, 215, 0, 0.06);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px; padding: 2px;
+        }
+        .qty-btn {
+            width: 26px; height: 26px; border-radius: 50%;
+            background: transparent; border: none; color: var(--gold);
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; transition: all 0.2s ease;
+        }
+        .qty-btn:hover { background: var(--gold); color: var(--bg-dark); }
+        .qty-value {
+            font-size: 0.78rem; font-weight: 700; min-width: 20px;
+            text-align: center; color: var(--gold-light);
+        }
+
+        .modal-footer {
+            padding: 18px 20px 22px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            background: rgba(7, 5, 4, 0.5);
+            border-radius: 0 0 22px 22px;
+        }
+        .cart-total-row {
+            display: flex; justify-content: space-between; align-items: baseline;
+            margin-bottom: 8px; padding: 0 4px;
+        }
+        .cart-total-label {
+            font-size: 0.72rem; letter-spacing: 2px;
+            text-transform: uppercase; color: var(--text-muted);
+            font-weight: 700;
+        }
+        .cart-total-value {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem; font-weight: 700;
+            color: var(--gold);
+            text-shadow: 0 0 15px rgba(255,215,0,0.5);
+        }
+        .discount-row {
+            display: none;
+            justify-content: space-between; align-items: center;
+            margin-bottom: 12px; padding: 8px 12px;
+            background: rgba(37, 211, 102, 0.08);
+            border: 1px solid rgba(37, 211, 102, 0.3);
+            border-radius: 12px;
+        }
+        .discount-row.show { display: flex; }
+        .discount-label { font-size: 0.72rem; color: #6fff9f; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+        .discount-value { font-size: 0.88rem; color: #6fff9f; font-weight: 700; font-family: 'Playfair Display', serif; }
+        .discount-hint {
+            font-size: 0.68rem; color: var(--text-muted);
+            text-align: center; margin-bottom: 12px;
+            padding: 8px 12px;
+            background: rgba(255,215,0,0.05);
+            border: 1px dashed rgba(255,215,0,0.3);
+            border-radius: 10px;
+            display: none;
+        }
+        .discount-hint.show { display: block; }
+        .discount-hint b { color: var(--gold); }
+
+        .points-preview {
+            display: flex; align-items: center; gap: 8px;
+            padding: 8px 14px; margin-bottom: 12px;
+            background: linear-gradient(90deg, rgba(255,215,0,0.1), rgba(255,215,0,0.02));
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 12px;
+            font-size: 0.72rem;
+            color: var(--gold-light);
+            font-weight: 600;
+        }
+        .points-preview i { color: var(--gold); }
+        .points-preview b { color: var(--gold); }
+
+        .cart-book-btn {
+            width: 100%; padding: 16px;
+            background: var(--gold-gradient); color: var(--bg-dark);
+            border: none; border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700; font-size: 0.85rem;
+            letter-spacing: 1.5px; text-transform: uppercase;
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 10px;
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+            transition: all 0.3s ease;
+            position: relative; overflow: hidden;
+        }
+        .cart-book-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.6s ease;
+        }
+        .cart-book-btn:hover::before { left: 100%; }
+        .cart-book-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 35px rgba(255, 215, 0, 0.75); }
+        .cart-book-btn i { font-size: 1.1rem; }
+        .cart-book-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+        /* ═══════════════════ QUICK VIEW MODAL ═══════════════════ */
+        .quick-view-overlay {
+            position: fixed; inset: 0;
+            background: rgba(3, 2, 1, 0.95);
+            backdrop-filter: blur(14px);
+            z-index: 5100;
+            opacity: 0; visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .quick-view-overlay.open { opacity: 1; visibility: visible; }
+        .quick-view-panel {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 28px;
+            width: 100%; max-width: 480px;
+            padding: 32px 28px 26px;
+            position: relative;
+            box-shadow: 0 0 80px rgba(255,215,0,0.4), 0 30px 80px rgba(0,0,0,0.95);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.5s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        .quick-view-overlay.open .quick-view-panel { transform: scale(1) translateY(0); }
+        .qv-close {
+            position: absolute; top: 16px; right: 16px;
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: transparent;
+            border: 1.5px solid rgba(255,215,0,0.35);
+            color: var(--gold);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.3s ease;
+        }
+        .qv-close:hover { background: var(--gold); color: var(--bg-dark); transform: rotate(90deg); }
+
+        .qv-category {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 6px 14px;
+            background: rgba(255,215,0,0.1);
+            border: 1px solid rgba(255,215,0,0.35);
+            border-radius: 30px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+        .qv-category i { font-size: 0.7rem; }
+
+        .qv-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--gold-light);
+            font-style: italic;
+            line-height: 1.15;
+            margin-bottom: 8px;
+        }
+        .qv-price {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.4rem;
+            font-weight: 700;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 18px;
+            filter: drop-shadow(0 0 15px rgba(255,215,0,0.4));
+        }
+        .qv-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            padding: 14px 16px;
+            background: rgba(7,5,4,0.6);
+            border-left: 3px solid var(--gold);
+            border-radius: 10px;
+        }
+        .qv-highlights {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 22px;
+        }
+        .qv-highlight {
+            background: rgba(255,215,0,0.06);
+            border: 1px solid rgba(255,215,0,0.2);
+            border-radius: 12px;
+            padding: 10px 12px;
+            font-size: 0.72rem;
+            display: flex; align-items: center; gap: 8px;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+        .qv-highlight i { color: var(--gold); font-size: 0.85rem; }
+
+        .qv-actions { display: flex; gap: 10px; }
+        .qv-btn {
+            flex: 1;
+            padding: 14px;
+            border-radius: 50px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.78rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            border: 1.5px solid var(--gold);
+        }
+        .qv-btn.primary {
+            background: var(--gold-gradient);
+            color: var(--bg-dark);
+            border-color: transparent;
+            box-shadow: 0 6px 20px rgba(255,215,0,0.4);
+        }
+        .qv-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,215,0,0.7); }
+        .qv-btn.secondary {
+            background: transparent;
+            color: var(--gold);
+        }
+        .qv-btn.secondary:hover { background: var(--gold); color: var(--bg-dark); }
+
+        /* ═══════════════════ TOAST ═══════════════════ */
+        .toast {
+            position: fixed; bottom: 160px; left: 50%;
+            transform: translateX(-50%) translateY(20px);
+            background: var(--gold); color: var(--bg-dark);
+            padding: 11px 24px;
+            border-radius: 50px;
+            font-size: 0.75rem; font-weight: 700;
+            letter-spacing: 1px;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.5);
+            opacity: 0; pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.34,1.4,0.5,1);
+            z-index: 6000;
+            display: flex; align-items: center; gap: 8px;
+            max-width: calc(100% - 40px);
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.error { background: var(--danger); color: white; }
+
+        /* ═══════════════════ CONFETTI ═══════════════════ */
+        .confetti-piece {
+            position: fixed;
+            width: 9px; height: 9px;
+            pointer-events: none;
+            z-index: 7000;
+            border-radius: 2px;
+        }
+
+        /* ═══════════════════ RECENTLY VIEWED ═══════════════════ */
+        .recent-section {
+            max-width: 1180px;
+            margin: 40px auto 0;
+            padding: 0 20px;
+            display: none;
+        }
+        .recent-section.show { display: block; }
+        .recent-head {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+        }
+        .recent-head i { color: var(--gold); }
+        .recent-list {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            scrollbar-width: none;
+        }
+        .recent-list::-webkit-scrollbar { display: none; }
+        .recent-item {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,215,0,0.3);
+            border-radius: 14px;
+            padding: 12px 16px;
+            white-space: nowrap;
+            font-size: 0.78rem;
+            color: var(--white);
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .recent-item:hover { border-color: var(--gold); background: var(--bg-card-hover); transform: translateY(-2px); }
+        .recent-item i { color: var(--gold); font-size: 0.75rem; }
+
+        /* ═══════════════════ FOOTER ═══════════════════ */
+        footer {
+            background: #030201;
+            text-align: center;
+            padding: 50px 20px 100px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 2px solid var(--border-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        footer::before {
+            content: '';
+            position: absolute;
+            top: -50%; left: 50%;
+            transform: translateX(-50%);
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,215,0,0.15), transparent 70%);
+            filter: blur(50px);
+            pointer-events: none;
+        }
+        footer .footer-brand {
+            font-family: 'Playfair Display', serif;
+            color: var(--gold-light);
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+        footer .footer-line { width: 60px; height: 2px; background: var(--gold); margin: 14px auto; box-shadow: 0 0 10px var(--gold); }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .cursor-glow, .cursor-dot, .sparkle-trail, .orbs-layer { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MESH BG + ORBS + CURSOR -->
+    <div class="mesh-bg">
+        <div class="mesh-blob mesh-blob-1"></div>
+        <div class="mesh-blob mesh-blob-2"></div>
+        <div class="mesh-blob mesh-blob-3"></div>
+    </div>
+    <div class="orbs-layer" id="orbsLayer"></div>
+    <div class="cursor-glow" id="cursorGlow"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- Scroll progress -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <!-- Ticker -->
+    <div class="promo-ticker">
+        <div class="ticker-track">
+            ✨ GIFT BEAUTY AND SPA ZONE • 24/7 LUXURY SPA IN LEKKI PHASE 1 • BOOK SWEDISH, HOT STONE &amp; FACIALS NOW ✨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            ✨ GIFT BEAUTY AND SPA ZONE • 24/7 LUXURY SPA IN LEKKI PHASE 1 • BOOK SWEDISH, HOT STONE &amp; FACIALS NOW ✨
+        </div>
+    </div>
+
+    <!-- Top bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-location-dot" style="color: var(--gold);"></i> No 13 Prince Bode Adebowale Crescent, Lekki Phase 1, Lagos</span>
+        <span><i class="fa-solid fa-phone" style="color: var(--gold);"></i> <a href="tel:+2349053224196">0905 322 4196</a> • Open 24/7</span>
+    </div>
+
+    <!-- Header -->
+    <header id="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="Gift Beauty Logo" class="logo-badge-img">
+            <div class="logo-text">
+                Gift Beauty
+                <span>&amp; Spa Zone</span>
+            </div>
+        </a>
+        <div style="position: relative;">
+            <button class="hamburger-btn" id="menuToggleBtn" onclick="toggleMenu()" aria-label="Open menu">
+                <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+            </button>
+            <div class="nav-dropdown" id="navDropdown">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home Index</a>
+                <a href="price.html"><i class="fa-solid fa-tag"></i> Price List</a>
+                <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+                <a href="contact.html"><i class="fa-solid fa-headset"></i> Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="sparkles" id="sparkleLayer"></div>
+        <div class="page-header-content reveal">
+            <h1 id="heroTitle">Luxury Menu &amp; Pricing</h1>
+            <p>Indulge your senses. Build your spa day, save 10% on bundles, and earn loyalty points with every visit.</p>
+            <div class="gold-line"></div>
+            <div class="live-status">
+                <span class="live-dot"></span>
+                <span id="liveStatusText">Open Now • 24/7 Service</span>
+            </div>
+
+            <!-- COUNTDOWN PROMO -->
+            <div class="promo-countdown reveal">
+                <div class="promo-icon"><i class="fa-solid fa-bolt"></i></div>
+                <div class="promo-text-wrap">
+                    <span class="promo-label">Today's Flash Deal</span>
+                    <span class="promo-main">Book <b>any 2 treatments</b> &amp; get <b>10% OFF</b> your total</span>
+                </div>
+                <div class="countdown-display">
+                    <div class="countdown-unit"><span class="countdown-value" id="cd-hours">00</span><span class="countdown-label">Hrs</span></div>
+                    <div class="countdown-unit"><span class="countdown-value" id="cd-min">00</span><span class="countdown-label">Min</span></div>
+                    <div class="countdown-unit"><span class="countdown-value" id="cd-sec">00</span><span class="countdown-label">Sec</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <div class="stats-row reveal">
+        <div class="stat-card">
+            <i class="fa-solid fa-list-check"></i>
+            <span class="stat-num" data-count="57" data-suffix="">0</span>
+            <span class="stat-label">Services</span>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-layer-group"></i>
+            <span class="stat-num" data-count="6" data-suffix="">0</span>
+            <span class="stat-label">Categories</span>
+        </div>
+        <div class="stat-card">
+            <i class="fa-regular fa-clock"></i>
+            <span class="stat-num" data-count="24" data-suffix="/7">0</span>
+            <span class="stat-label">Always Open</span>
+        </div>
+        <div class="stat-card">
+            <i class="fa-solid fa-heart"></i>
+            <span class="stat-num" data-count="500" data-suffix="+">0</span>
+            <span class="stat-label">Happy Clients</span>
+        </div>
+    </div>
+
+    <!-- Recently viewed -->
+    <div class="recent-section" id="recentSection">
+        <div class="recent-head"><i class="fa-solid fa-clock-rotate-left"></i> Recently Viewed</div>
+        <div class="recent-list" id="recentList"></div>
+    </div>
+
+    <!-- Toolbar -->
+    <div class="toolbar-wrap reveal">
+        <div class="toolbar">
+            <div class="search-box">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="searchInput" placeholder="Search treatments, e.g. massage, facial, waxing..." autocomplete="off">
+                <span class="kbd-hint">⌘K</span>
+                <button class="search-clear" id="searchClear" aria-label="Clear search">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <select class="toolbar-select" id="sortSelect" aria-label="Sort">
+                <option value="popular">🔥 Popular First</option>
+                <option value="price-low">₦ Price: Low → High</option>
+                <option value="price-high">₦ Price: High → Low</option>
+                <option value="name">A → Z Name</option>
+            </select>
+
+            <button class="wishlist-toggle" id="wishlistToggle" onclick="toggleWishlistFilter()">
+                <i class="fa-solid fa-heart"></i>
+                <span>Saved</span>
+                <span class="wishlist-badge" id="wishlistBadge">0</span>
+            </button>
+
+            <button class="lucky-btn" onclick="feelingLucky()">
+                <i class="fa-solid fa-dice"></i>
+                Lucky Pick
+            </button>
+
+            <div class="price-slider-wrap">
+                <i class="fa-solid fa-coins"></i>
+                <input type="range" class="price-slider" id="priceSlider" min="0" max="150000" step="5000" value="150000">
+                <span class="price-slider-value" id="priceSliderValue">Up to ₦150k</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Category Nav -->
+    <div class="category-nav-wrap">
+        <nav class="category-nav" id="categoryNav">
+            <a href="#massage" class="active" data-target="massage"><i class="fa-solid fa-hands-bubbles"></i> Massages</a>
+            <a href="#facials" data-target="facials"><i class="fa-solid fa-face-smile"></i> Facials</a>
+            <a href="#body" data-target="body"><i class="fa-solid fa-spa"></i> Body</a>
+            <a href="#waxing" data-target="waxing"><i class="fa-solid fa-wand-magic-sparkles"></i> Waxing</a>
+            <a href="#nails" data-target="nails"><i class="fa-solid fa-hand-sparkles"></i> Men's Nails</a>
+            <a href="#other" data-target="other"><i class="fa-solid fa-gem"></i> Other</a>
+        </nav>
+    </div>
+
+    <div class="menu-container" id="menuContainer">
+
+        <!-- BODY MASSAGE -->
+        <section class="category-section reveal" id="massage" data-category="massage">
+            <h2 class="section-title"><i class="fa-solid fa-hands-bubbles"></i> Body Massage <span class="section-count">16 Treatments</span></h2>
+            <div class="items-grid" data-original-order="true">
+
+                <div class="price-card" data-name="Swedish Massage" data-price="30000" data-category="massage" data-desc="A gentle, flowing full-body massage using long, smooth strokes to melt tension and calm your nervous system. Perfect for first-timers and stress relief." data-duration="60 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Swedish</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span><span class="tag tag-deal">60min</span></div>
+                    </div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save to favorites"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Swedish%20Massage%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn" aria-label="Book on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Deep Tissue Massage" data-price="40000" data-category="massage" data-desc="Intense pressure targeting the deepest layers of muscle. Ideal for athletes, chronic pain, and stubborn knots. Expect to feel it tomorrow — in a good way." data-duration="60 mins">
+                    <div class="row-main"><span class="item-name">Deep Tissue</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Deep%20Tissue%20Massage%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Hot Stone Massage" data-price="60000" data-category="massage" data-desc="Heated basalt stones gliding over your body, melting deep tension. Pure warmth + expert pressure = the ultimate relaxation experience." data-duration="75 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Hot Stone</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span><span class="tag tag-deal">75min</span></div>
+                    </div>
+                    <span class="item-price">₦60,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Hot%20Stone%20Massage%20(60k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Aromatherapy Massage" data-price="50000" data-category="massage" data-desc="Essential oils selected for your mood, blended into a soothing massage. A sensory journey for body and mind." data-duration="60 mins">
+                    <div class="row-main"><span class="item-name">Aromatherapy</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Aromatherapy%20Massage%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Thai Massage" data-price="50000" data-category="massage" data-desc="Traditional Thai-style stretching and pressure point work. Improves flexibility, releases blockages, and energizes the body." data-duration="60 mins">
+                    <div class="row-main"><span class="item-name">Thai Massage</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Thai%20Massage%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Herbal Massage" data-price="60000" data-category="massage" data-desc="Warm herbal compress + restorative massage. Ancient remedy for modern stress. Deeply therapeutic." data-duration="75 mins">
+                    <div class="row-main"><span class="item-name">Herbal Massage</span></div>
+                    <span class="item-price">₦60,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Herbal%20Massage%20(60k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Gun Massage" data-price="40000" data-category="massage" data-desc="Percussive therapy using a massage gun to break up tension. Fast, targeted, and effective for tight muscles." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Gun Massage</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Gun%20Massage%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Back Massage" data-price="20000" data-category="massage" data-desc="Targeted relief for the back, neck, and shoulders. Perfect for desk workers and anyone carrying the week's weight." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Back Massage</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Back%20Massage%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Couple Massage" data-price="80000" data-category="massage" data-desc="Share a private suite with your partner. Two therapists, two massages, one beautiful shared experience." data-duration="60 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Couple Massage</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span><span class="tag tag-deal">For Two</span></div>
+                    </div>
+                    <span class="item-price">₦80,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Couple%20Massage%20(80k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Four-hand Massage" data-price="80000" data-category="massage" data-desc="Two therapists, four hands, one continuous synchronized experience. The ultimate indulgence." data-duration="60 mins">
+                    <div class="row-main">
+                        <span class="item-name">Four-hand Massage</span>
+                        <div class="item-tags"><span class="tag tag-luxury">👑 Luxury</span></div>
+                    </div>
+                    <span class="item-price">₦80,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Four-hand%20Massage%20(80k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Wood Therapy" data-price="50000" data-category="massage" data-desc="Wooden tools sculpt and stimulate the body — boosts circulation, reduces cellulite, and leaves skin tight." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Wood Therapy</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Wood%20Therapy%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Prenatal Massage" data-price="50000" data-category="massage" data-desc="Safe, gentle massage designed for expecting mothers. Relieves back pain, swelling, and stress with mama and baby in mind." data-duration="60 mins">
+                    <div class="row-main"><span class="item-name">Prenatal Massage</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Prenatal%20Massage%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Reflexology Hands Legs" data-price="20000" data-category="massage" data-desc="Ancient pressure-point therapy on hands and feet. Improves circulation, relieves stress, and balances the whole body." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Reflexology (Hands/Legs)</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Reflexology%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Infrared Light Massage" data-price="60000" data-category="massage" data-desc="Infrared light penetrates deep to relax muscles and rejuvenate skin. Advanced tech, ancient comfort." data-duration="60 mins">
+                    <div class="row-main"><span class="item-name">Infrared Light Massage</span></div>
+                    <span class="item-price">₦60,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Infrared%20Light%20Massage%20(60k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Erotic Massage" data-price="100000" data-category="massage" data-desc="Sensual, intimate massage experience. Discretion, luxury, and skill in a private suite." data-duration="75 mins">
+                    <div class="row-main">
+                        <span class="item-name">Erotic Massage</span>
+                        <div class="item-tags"><span class="tag tag-luxury">👑 Luxury</span></div>
+                    </div>
+                    <span class="item-price">₦100,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Erotic%20Massage%20(100k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Nuru Massage" data-price="150000" data-category="massage" data-desc="Signature Nuru gel massage from Japan — silky, sliding, and unforgettable. Our most luxurious experience." data-duration="90 mins">
+                    <div class="row-main">
+                        <span class="item-name">Nuru Massage</span>
+                        <div class="item-tags"><span class="tag tag-luxury">👑 Signature</span></div>
+                    </div>
+                    <span class="item-price">₦150,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)" aria-label="Save"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)" aria-label="Quick view"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)" aria-label="Add to bag"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Nuru%20Massage%20(150k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FACIALS -->
+        <section class="category-section reveal" id="facials" data-category="facials">
+            <h2 class="section-title"><i class="fa-solid fa-face-smile"></i> Facial Treatments <span class="section-count">10 Treatments</span></h2>
+            <div class="items-grid">
+
+                <div class="price-card" data-name="Derma-planing Facial" data-price="35000" data-category="facials" data-desc="Gentle exfoliation with a surgical blade removes dead skin and peach fuzz — instant glow and smoother makeup application." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Derma-planing Facial</span></div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Derma-planing%20Facial%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Acnepimples Facial" data-price="40000" data-category="facials" data-desc="Targeted acne-clearing treatment with deep cleansing, extraction, and soothing masks to calm inflammation and reduce breakouts." data-duration="50 mins">
+                    <div class="row-main"><span class="item-name">Acnepimples Facial</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Acnepimples%20Facial%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Anti-aging Facial" data-price="35000" data-category="facials" data-desc="Firming, plumping, and hydrating treatment that targets fine lines and loss of elasticity. Leaves skin looking years younger." data-duration="50 mins">
+                    <div class="row-main"><span class="item-name">Anti-aging Facial</span></div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Anti-aging%20Facial%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Brightening Facial" data-price="35000" data-category="facials" data-desc="Vitamin-rich treatment that fades dark spots, evens tone, and reveals radiant, luminous skin." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Brightening Facial</span></div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Brightening%20Facial%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Deep Cleansing Facial" data-price="35000" data-category="facials" data-desc="The ultimate reset for congested skin. Deep pore cleansing, exfoliation, and extractions leave skin squeaky clean and refreshed." data-duration="50 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Deep Cleansing</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span></div>
+                    </div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Deep%20Cleansing%20Facial%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Classic Facial" data-price="30000" data-category="facials" data-desc="The timeless facial — cleanse, exfoliate, massage, mask, moisturize. Perfect for regular skin maintenance." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Classic Facial</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Classic%20Facial%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Teen student Facial" data-price="25000" data-category="facials" data-desc="Gentle facial designed for younger skin. Addresses teenage breakouts and teaches good skincare habits." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Teen/student Facial</span></div>
+                    <span class="item-price">₦25,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Teen/student%20Facial%20(25k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="High Frequency Facial" data-price="35000" data-category="facials" data-desc="High-frequency current kills acne bacteria and boosts healing. Fast results for active breakouts." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">High Frequency Facial</span></div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20High%20Frequency%20Facial%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Butt Facial" data-price="20000" data-category="facials" data-desc="Yes, really! Deep cleansing, exfoliating, and brightening treatment for the buttocks. Smooth, even, radiant skin." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Butt Facial</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Butt%20Facial%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Add On Led Light Jelly Mask" data-price="0" data-category="facials" data-desc="Enhance any facial with LED light therapy or a nourishing jelly mask. Ask us for current pricing based on your skin needs." data-duration="15 mins add-on">
+                    <div class="row-main"><span class="item-name">Add On Led Light / Jelly Mask</span></div>
+                    <span class="item-price ask">Ask Us</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" disabled><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20ask%20about%20Led%20Light/Jelly%20Mask" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- BODY -->
+        <section class="category-section reveal" id="body" data-category="body">
+            <h2 class="section-title"><i class="fa-solid fa-spa"></i> Body Treatment <span class="section-count">10 Treatments</span></h2>
+            <div class="items-grid">
+
+                <div class="price-card" data-name="Glow Body Polish" data-price="50000" data-category="body" data-desc="Full-body exfoliation with nourishing oils and polish. Reveals luminous, soft, glowing skin head to toe." data-duration="50 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Glow Body Polish</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span></div>
+                    </div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Glow%20Body%20Polish%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Stram Bath" data-price="30000" data-category="body" data-desc="Steam bath to open pores, release toxins, and relax muscles. Detoxifying and deeply comforting." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Stram Bath</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Stram%20Bath%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Moroccan Bath" data-price="50000" data-category="body" data-desc="Traditional Moroccan hammam ritual with black soap and kessa glove. Silky-soft, renewed skin." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Moroccan Bath</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Moroccan%20Bath%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Whitening" data-price="40000" data-category="body" data-desc="Brightening and evening treatment for skin tone. Natural radiance, not bleach." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Whitening</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Whitening%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Body Scrub" data-price="40000" data-category="body" data-desc="Full-body exfoliation with sugar or salt scrub. Removes dead skin, boosts circulation, and preps skin for hydration." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Body Scrub</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Body%20Scrub%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Herman Bath" data-price="60000" data-category="body" data-desc="Deep-cleansing herbal bath that soothes the nervous system and leaves you feeling reborn." data-duration="50 mins">
+                    <div class="row-main"><span class="item-name">Herman Bath</span></div>
+                    <span class="item-price">₦60,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Herman%20Bath%20(60k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Sugarhoney Scrub" data-price="40000" data-category="body" data-desc="Sweet and gentle exfoliation with sugar and honey. Leaves skin soft, smooth, and lightly scented." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Sugarhoney Scrub</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Sugarhoney%20Scrub%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Coffee Scrub" data-price="40000" data-category="body" data-desc="Energizing coffee scrub that wakes up skin and reduces the appearance of cellulite." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Coffee Scrub</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Coffee%20Scrub%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Caramel Glow Scrub" data-price="40000" data-category="body" data-desc="Warm caramel-scented scrub that buffs, smooths, and leaves you glowing and smelling divine." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Caramel Glow Scrub</span></div>
+                    <span class="item-price">₦40,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Caramel%20Glow%20Scrub%20(40k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Body Wash" data-price="50000" data-category="body" data-desc="Refreshing full-body wash with premium products. Simple, effective, and perfect as an add-on." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Body Wash</span></div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Body%20Wash%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- WAXING -->
+        <section class="category-section reveal" id="waxing" data-category="waxing">
+            <h2 class="section-title"><i class="fa-solid fa-wand-magic-sparkles"></i> Waxing <span class="section-count">13 Treatments</span></h2>
+            <div class="items-grid">
+
+                <div class="price-card" data-name="Underarm Waxing" data-price="15000" data-category="waxing" data-desc="Quick, efficient underarm waxing for smooth, hair-free skin. Long-lasting results." data-duration="15 mins">
+                    <div class="row-main"><span class="item-name">Underarm</span></div>
+                    <span class="item-price">₦15,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Underarm%20Waxing%20(15k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Full Leg Waxing" data-price="30000" data-category="waxing" data-desc="Full leg waxing for weeks of smooth skin. Gentle formula, minimal discomfort." data-duration="45 mins">
+                    <div class="row-main"><span class="item-name">Full Leg</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Full%20Leg%20Waxing%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Brazilian Waxing" data-price="25000" data-category="waxing" data-desc="Professional Brazilian waxing by trained therapists. Discrete, hygienic, and thorough." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Brazilian Waxing</span></div>
+                    <span class="item-price">₦25,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Brazilian%20Waxing%20(25k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Bikini Waxing" data-price="30000" data-category="waxing" data-desc="Bikini waxing for a clean, fresh feel. Skilled therapists, quality wax, best hygiene." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Bikini Waxing</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Bikini%20Waxing%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Full Chest Waxing" data-price="30000" data-category="waxing" data-desc="Full chest waxing for men or women. Smooth, clean results." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Full Chest</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Full%20Chest%20Waxing%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Face Waxing" data-price="20000" data-category="waxing" data-desc="Gentle facial waxing for peach fuzz and stray hair. Brightens the complexion instantly." data-duration="20 mins">
+                    <div class="row-main"><span class="item-name">Face Waxing</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Face%20Waxing%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Nose Waxing" data-price="10000" data-category="waxing" data-desc="Quick, clean nose wax. Say goodbye to unwanted hair in seconds." data-duration="10 mins">
+                    <div class="row-main"><span class="item-name">Nose Waxing</span></div>
+                    <span class="item-price">₦10,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Nose%20Waxing%20(10k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Eyebrow Waxing" data-price="10000" data-category="waxing" data-desc="Perfectly shaped eyebrows by our skilled therapists. Frames your face." data-duration="15 mins">
+                    <div class="row-main"><span class="item-name">Eye brow</span></div>
+                    <span class="item-price">₦10,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Eye%20brow%20Waxing%20(10k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Upper Lip Waxing" data-price="10000" data-category="waxing" data-desc="Quick upper lip wax for a smooth, clean finish." data-duration="10 mins">
+                    <div class="row-main"><span class="item-name">Upper Lip</span></div>
+                    <span class="item-price">₦10,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Upper%20Lip%20Waxing%20(10k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Full Arm Waxing" data-price="25000" data-category="waxing" data-desc="Full arm waxing for smooth, hair-free skin. Gentle on sensitive skin." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Full Arm</span></div>
+                    <span class="item-price">₦25,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Full%20Arm%20Waxing%20(25k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Chin Waxing" data-price="15000" data-category="waxing" data-desc="Quick chin wax for a smooth, hair-free finish." data-duration="15 mins">
+                    <div class="row-main"><span class="item-name">Chin Waxing</span></div>
+                    <span class="item-price">₦15,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Chin%20Waxing%20(15k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Half Chest Waxing" data-price="20000" data-category="waxing" data-desc="Half chest waxing for smooth, clean results. Ideal for men." data-duration="20 mins">
+                    <div class="row-main"><span class="item-name">Half Chest</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Half%20Chest%20Waxing%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Full Back Waxing" data-price="25000" data-category="waxing" data-desc="Full back waxing for a clean, smooth back. Discreet and professional." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Full Back Waxing</span></div>
+                    <span class="item-price">₦25,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Full%20Back%20Waxing%20(25k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- NAILS MEN -->
+        <section class="category-section reveal" id="nails" data-category="nails">
+            <h2 class="section-title"><i class="fa-solid fa-hand-sparkles"></i> Nail Treatment - Men <span class="section-count">5 Treatments</span></h2>
+            <div class="items-grid">
+
+                <div class="price-card" data-name="Classic Pedicure" data-price="15000" data-category="nails" data-desc="Classic pedicure with soak, scrub, and nail care. Clean, comfortable feet." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Classic Pedicure</span></div>
+                    <span class="item-price">₦15,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Classic%20Pedicure%20(15k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Jelly Pedicure" data-price="20000" data-category="nails" data-desc="Jelly pedicure — soothing, hydrating, and fun. Feet feel brand new." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Jelly Pedicure</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Jelly%20Pedicure%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Fruit Pedicure" data-price="20000" data-category="nails" data-desc="Fruit-acid pedicure that exfoliates and refreshes tired feet." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Fruit Pedicure</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Fruit%20Pedicure%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Foot Detox" data-price="25000" data-category="nails" data-desc="Detoxifying foot treatment that draws out impurities and refreshes tired feet." data-duration="40 mins">
+                    <div class="row-main"><span class="item-name">Foot Detox</span></div>
+                    <span class="item-price">₦25,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Foot%20Detox%20(25k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Foot Delox and Pedicure" data-price="35000" data-category="nails" data-desc="Complete foot detox plus pedicure — the ultimate foot refresh." data-duration="55 mins">
+                    <div class="row-main"><span class="item-name">Foot Delox and Pedicure</span></div>
+                    <span class="item-price">₦35,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Foot%20Delox%20and%20Pedicure%20(35k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- OTHER -->
+        <section class="category-section reveal" id="other" data-category="other">
+            <h2 class="section-title"><i class="fa-solid fa-gem"></i> Other Services <span class="section-count">3 Treatments</span></h2>
+            <div class="items-grid">
+
+                <div class="price-card" data-name="Teeth Whitening" data-price="50000" data-category="other" data-desc="Professional teeth whitening for a brighter, more confident smile. Visible results in one session." data-duration="45 mins" data-popular="true">
+                    <div class="row-main">
+                        <span class="item-name">Teeth Whitening</span>
+                        <div class="item-tags"><span class="tag tag-popular">⭐ Popular</span></div>
+                    </div>
+                    <span class="item-price">₦50,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Teeth%20Whitening%20(50k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Teeth Scaling" data-price="30000" data-category="other" data-desc="Professional scaling to remove plaque and tartar. Fresher breath and healthier gums." data-duration="30 mins">
+                    <div class="row-main"><span class="item-name">Teeth Scaling</span></div>
+                    <span class="item-price">₦30,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Teeth%20Scaling%20(30k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+                <div class="price-card" data-name="Skin Tags Removal per Part" data-price="20000" data-category="other" data-desc="Safe removal of skin tags by trained professionals. Per body part." data-duration="20 mins">
+                    <div class="row-main"><span class="item-name">Skin Tags Removal (per Part)</span></div>
+                    <span class="item-price">₦20,000</span>
+                    <div class="row-actions">
+                        <button class="icon-btn heart-btn" onclick="toggleFavorite(this)"><i class="fa-regular fa-heart"></i></button>
+                        <button class="icon-btn view-btn" onclick="openQuickView(this)"><i class="fa-solid fa-eye"></i></button>
+                        <button class="icon-btn add-btn" onclick="addToBag(this)"><i class="fa-solid fa-plus"></i></button>
+                        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty,%20I%20want%20to%20book%20Skin%20Tags%20Removal%20(20k)" target="_blank" rel="noopener" class="icon-btn book-btn"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div class="no-results" id="noResults">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <p>No treatments match your filters.</p>
+            <small>Try adjusting the price slider or clearing filters</small>
+            <button onclick="resetFilters()">Reset All Filters</button>
+        </div>
+
+    </div>
+
+    <footer>
+        <p class="footer-brand">Gift Beauty and Spa Zone</p>
+        <div class="footer-line"></div>
+        <p>&copy; 2026 Gift Beauty and Spa Zone. All rights reserved.</p>
+        <p style="margin-top: 4px;">Lekki Phase 1, Lagos, Nigeria • Open 24/7</p>
+    </footer>
+
+    <!-- SPA BAG PILL -->
+    <button class="spa-bag-pill" id="spaBagPill" onclick="openCart()" aria-label="Open spa bag">
+        <div class="bag-icon-wrap">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <span class="bag-count" id="bagCount">0</span>
+        </div>
+        <div class="bag-pill-text">
+            <span class="bag-pill-label">Spa Bag</span>
+            <span class="bag-pill-total" id="bagPillTotal">₦0</span>
+        </div>
+    </button>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty%20and%20Spa%20Zone%20%E2%9C%A8,%20I%20have%20an%20enquiry." target="_blank" rel="noopener" class="floating-wa" aria-label="Chat on WhatsApp">
+        <i class="fa-brands fa-whatsapp"></i>
+    </a>
+
+    <!-- CART MODAL -->
+    <div class="modal-overlay" id="cartOverlay">
+        <div class="modal-panel">
+            <div class="modal-header">
+                <div class="modal-title"><i class="fa-solid fa-bag-shopping"></i> Your Spa Bag</div>
+                <button class="modal-close" onclick="closeCart()" aria-label="Close cart"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="modal-body" id="cartBody"></div>
+            <div class="modal-footer">
+                <div class="discount-hint" id="discountHint">
+                    ✨ Add <b>1 more treatment</b> to unlock <b>10% off</b>!
+                </div>
+                <div class="cart-total-row">
+                    <span class="cart-total-label">Subtotal</span>
+                    <span class="cart-total-value" id="cartSubtotal" style="font-size:1.1rem;color:var(--text-muted);text-shadow:none;">₦0</span>
+                </div>
+                <div class="discount-row" id="discountRow">
+                    <span class="discount-label"><i class="fa-solid fa-tag"></i> Bundle Discount (10%)</span>
+                    <span class="discount-value" id="cartDiscount">-₦0</span>
+                </div>
+                <div class="cart-total-row">
+                    <span class="cart-total-label">Total</span>
+                    <span class="cart-total-value" id="cartTotal">₦0</span>
+                </div>
+                <div class="points-preview" id="pointsPreview">
+                    <i class="fa-solid fa-star"></i>
+                    <span>You'll earn <b id="pointsEarned">0</b> loyalty points with this order</span>
+                </div>
+                <button class="cart-book-btn" id="cartBookBtn" onclick="bookBag()">
+                    <i class="fa-brands fa-whatsapp"></i>
+                    Book All via WhatsApp
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- QUICK VIEW MODAL -->
+    <div class="quick-view-overlay" id="quickViewOverlay">
+        <div class="quick-view-panel">
+            <button class="qv-close" onclick="closeQuickView()" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+            <div class="qv-category" id="qvCategory"><i class="fa-solid fa-spa"></i> <span>Category</span></div>
+            <h3 class="qv-title" id="qvTitle">Service Name</h3>
+            <div class="qv-price" id="qvPrice">₦0</div>
+            <div class="qv-desc" id="qvDesc">Description</div>
+            <div class="qv-highlights">
+                <div class="qv-highlight"><i class="fa-regular fa-clock"></i> <span id="qvDuration">Duration</span></div>
+                <div class="qv-highlight"><i class="fa-solid fa-shield-halved"></i> Certified Therapists</div>
+                <div class="qv-highlight"><i class="fa-solid fa-star"></i> Premium Products</div>
+                <div class="qv-highlight"><i class="fa-solid fa-clock"></i> Open 24/7</div>
+            </div>
+            <div class="qv-actions">
+                <button class="qv-btn secondary" onclick="qvAddToBag()"><i class="fa-solid fa-plus"></i> Add to Bag</button>
+                <button class="qv-btn primary" onclick="qvBookNow()"><i class="fa-brands fa-whatsapp"></i> Book Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"><i class="fa-solid fa-check"></i> <span id="toastText">Added to bag</span></div>
+
+    <!-- BOTTOM BAR -->
+    <div class="bottom-bar">
+        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty%20and%20Spa%20Zone%20%E2%9C%A8,%20I%20have%20an%20enquiry." target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp
+        </a>
+        <a href="tel:+2349053224196">
+            <i class="fa-solid fa-phone"></i>
+            Call Us
+        </a>
+        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty%20and%20Spa%20Zone%20%E2%9C%A8,%20I%20would%20like%20to%20book%20an%20appointment." class="bottom-book-btn" target="_blank" rel="noopener">
+            <i class="fa-solid fa-calendar-check"></i>
+            Book Now
+        </a>
+    </div>
+
+    <script>
+    /* ═══════════════════════════════════════════════════════
+       INIT: SPARKLES, ORBS, CURSOR, PROGRESS, NAV
+       ═══════════════════════════════════════════════════════ */
+    (function buildSparkles() {
+        const layer = document.getElementById('sparkleLayer');
+        if (!layer) return;
+        for (let i = 0; i < 30; i++) {
+            const s = document.createElement('span');
+            const size = 2 + Math.random() * 3.5;
+            s.style.left = (Math.random() * 100) + '%';
+            s.style.top = (Math.random() * 100) + '%';
+            s.style.width = size + 'px';
+            s.style.height = size + 'px';
+            s.style.animationDelay = (Math.random() * 7).toFixed(2) + 's';
+            s.style.animationDuration = (4.5 + Math.random() * 5).toFixed(2) + 's';
+            layer.appendChild(s);
+        }
+    })();
+
+    (function buildOrbs() {
+        const layer = document.getElementById('orbsLayer');
+        if (!layer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        for (let i = 0; i < 12; i++) {
+            const orb = document.createElement('div');
+            orb.className = 'orb';
+            const size = 4 + Math.random() * 12;
+            orb.style.width = size + 'px';
+            orb.style.height = size + 'px';
+            orb.style.left = (Math.random() * 100) + '%';
+            orb.style.animationDuration = (18 + Math.random() * 20) + 's';
+            orb.style.animationDelay = (Math.random() * 20) + 's';
+            layer.appendChild(orb);
+        }
+    })();
+
+    // Cursor
+    (function initCursor() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const glow = document.getElementById('cursorGlow');
+        const dot = document.getElementById('cursorDot');
+        let mx = 0, my = 0, gx = 0, gy = 0;
+        let lastSparkle = 0;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            document.body.classList.add('mouse-active');
+            dot.style.left = mx + 'px';
+            dot.style.top = my + 'px';
+
+            const now = Date.now();
+            if (now - lastSparkle > 60) {
+                lastSparkle = now;
+                const s = document.createElement('div');
+                s.className = 'sparkle-trail';
+                s.style.left = mx + 'px';
+                s.style.top = my + 'px';
+                const size = 3 + Math.random() * 4;
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+                document.body.appendChild(s);
+                s.animate(
+                    [
+                        { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+                        { transform: `translate(-50%,-50%) translate(${(Math.random()-0.5)*40}px, ${(Math.random()-0.5)*40}px) scale(0)`, opacity: 0 }
+                    ],
+                    { duration: 700, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'forwards' }
+                ).onfinish = () => s.remove();
+            }
+        });
+        document.addEventListener('mouseleave', () => document.body.classList.remove('mouse-active'));
+
+        function loop() {
+            gx += (mx - gx) * 0.15;
+            gy += (my - gy) * 0.15;
+            glow.style.left = gx + 'px';
+            glow.style.top = gy + 'px';
+            requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+    })();
+
+    // Scroll progress + nav shrink
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const pct = docHeight > 0 ? (scrolled / docHeight) * 100 : 0;
+        const bar = document.getElementById('scrollProgress');
+        if (bar) bar.style.width = pct + '%';
+
+        const header = document.getElementById('navbar');
+        if (header) {
+            if (scrolled > 40) {
+                header.style.padding = '10px 5%';
+                header.style.background = 'rgba(7, 5, 4, 0.98)';
+            } else {
+                header.style.padding = '15px 5%';
+                header.style.background = 'rgba(7, 5, 4, 0.9)';
+            }
+        }
+    }, { passive: true });
+
+    // Hamburger
+    function toggleMenu() {
+        const dropdown = document.getElementById('navDropdown');
+        const icon = document.getElementById('hamburgerIcon');
+        dropdown.classList.toggle('active');
+        const open = dropdown.classList.contains('active');
+        icon.classList.toggle('fa-bars', !open);
+        icon.classList.toggle('fa-xmark', open);
+    }
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('navDropdown');
+        const btn = document.getElementById('menuToggleBtn');
+        const icon = document.getElementById('hamburgerIcon');
+        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.remove('active');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    // Reveal
+    (function initReveal() {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('active'));
+            return;
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+        els.forEach(el => obs.observe(el));
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       COUNTERS
+       ═══════════════════════════════════════════════════════ */
+    (function animateCounters() {
+        const nums = document.querySelectorAll('.stat-num');
+        if (!nums.length) return;
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                const target = parseInt(el.dataset.count, 10);
+                const suffix = el.dataset.suffix || '';
+                const dur = 1600;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / dur, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    el.textContent = Math.round(target * eased) + suffix;
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.5 });
+        nums.forEach(n => obs.observe(n));
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       LIVE STATUS
+       ═══════════════════════════════════════════════════════ */
+    (function updateLiveStatus() {
+        const txt = document.getElementById('liveStatusText');
+        if (!txt) return;
+        const hour = new Date().getHours();
+        let msg = 'Open Now • 24/7 Service';
+        if (hour >= 22 || hour < 5) msg = 'Open Now • Late Night Spa Available';
+        else if (hour >= 5 && hour < 9) msg = 'Open Now • Early Morning Available';
+        txt.textContent = msg;
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       COUNTDOWN (end of day)
+       ═══════════════════════════════════════════════════════ */
+    function updateCountdown() {
+        const now = new Date();
+        const end = new Date(now);
+        end.setHours(23, 59, 59, 999);
+        let diff = Math.max(0, end - now);
+        const hrs = Math.floor(diff / 3600000);
+        const mins = Math.floor((diff % 3600000) / 60000);
+        const secs = Math.floor((diff % 60000) / 1000);
+        document.getElementById('cd-hours').textContent = String(hrs).padStart(2,'0');
+        document.getElementById('cd-min').textContent = String(mins).padStart(2,'0');
+        document.getElementById('cd-sec').textContent = String(secs).padStart(2,'0');
+    }
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+
+    /* ═══════════════════════════════════════════════════════
+       TEXT SCRAMBLE HERO
+       ═══════════════════════════════════════════════════════ */
+    (function scrambleHero() {
+        const el = document.getElementById('heroTitle');
+        if (!el) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const finalText = 'Luxury Menu & Pricing';
+        const chars = '!<>-_\\/[]{}—=+*^?#_₦✦✧◆';
+        let frame = 0;
+        const totalFrames = 40;
+        const len = finalText.length;
+        function run() {
+            let output = '';
+            for (let i = 0; i < len; i++) {
+                const progress = frame / totalFrames;
+                const revealAt = i / len;
+                if (progress > revealAt + 0.2) {
+                    output += finalText[i];
+                } else if (progress > revealAt) {
+                    output += chars[Math.floor(Math.random() * chars.length)];
+                } else {
+                    output += ' ';
+                }
+            }
+            el.textContent = output;
+            frame++;
+            if (frame <= totalFrames) {
+                setTimeout(run, 30);
+            } else {
+                el.textContent = finalText;
+            }
+        }
+        setTimeout(run, 300);
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       STATE
+       ═══════════════════════════════════════════════════════ */
+    let bag = [];
+    let wishlist = new Set(JSON.parse(localStorage.getItem('gb_wishlist') || '[]'));
+    let recentlyViewed = JSON.parse(localStorage.getItem('gb_recent') || '[]');
+    let wishlistFilterActive = false;
+    let currentQuickView = null;
+
+    const allCards = Array.from(document.querySelectorAll('.price-card'));
+    const allSections = Array.from(document.querySelectorAll('.category-section'));
+    const searchInput = document.getElementById('searchInput');
+    const searchClear = document.getElementById('searchClear');
+    const sortSelect = document.getElementById('sortSelect');
+    const priceSlider = document.getElementById('priceSlider');
+    const priceSliderValue = document.getElementById('priceSliderValue');
+    const noResults = document.getElementById('noResults');
+
+    /* ═══════════════════════════════════════════════════════
+       HELPERS
+       ═══════════════════════════════════════════════════════ */
+    function formatNaira(n) { return '₦' + n.toLocaleString('en-NG'); }
+    function escapeHtml(str) {
+        return String(str).replace(/[&<>"']/g, s => ({
+            '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'
+        }[s]));
+    }
+    function escapeAttr(str) { return String(str).replace(/'/g, "\\'").replace(/"/g, '&quot;'); }
+
+    /* ═══════════════════════════════════════════════════════
+       FILTERING ENGINE
+       ═══════════════════════════════════════════════════════ */
+    function applyFilters() {
+        const q = searchInput.value.trim().toLowerCase();
+        const maxPrice = parseInt(priceSlider.value, 10);
+        searchClear.classList.toggle('show', q.length > 0);
+
+        let anyVisible = false;
+        allCards.forEach(card => {
+            const name = card.dataset.name.toLowerCase();
+            const price = parseInt(card.dataset.price, 10) || 0;
+            const matchesSearch = q === '' || name.includes(q);
+            const matchesPrice = price === 0 || price <= maxPrice;
+            const matchesWishlist = !wishlistFilterActive || wishlist.has(card.dataset.name);
+            const visible = matchesSearch && matchesPrice && matchesWishlist;
+            card.classList.toggle('hide', !visible);
+            if (visible) anyVisible = true;
+        });
+
+        allSections.forEach(section => {
+            const visibleRows = section.querySelectorAll('.price-card:not(.hide)').length;
+            section.classList.toggle('hide', visibleRows === 0);
+        });
+
+        noResults.classList.toggle('show', !anyVisible);
+    }
+
+    function updateSliderFill() {
+        const val = parseInt(priceSlider.value, 10);
+        const pct = (val / 150000) * 100;
+        priceSlider.style.setProperty('--slider-fill', pct + '%');
+        priceSliderValue.textContent = val >= 150000 ? 'Up to ₦150k' : 'Up to ' + formatNaira(val);
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    searchClear.addEventListener('click', () => { searchInput.value = ''; applyFilters(); searchInput.focus(); });
+    priceSlider.addEventListener('input', () => { updateSliderFill(); applyFilters(); });
+    updateSliderFill();
+
+    function resetFilters() {
+        searchInput.value = '';
+        priceSlider.value = 150000;
+        wishlistFilterActive = false;
+        document.getElementById('wishlistToggle').classList.remove('active');
+        updateSliderFill();
+        sortSelect.value = 'popular';
+        applySort();
+        applyFilters();
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SORT
+       ═══════════════════════════════════════════════════════ */
+    function applySort() {
+        const sort = sortSelect.value;
+        if (sort === 'popular') {
+            // Restore original order by re-appending from a cached array
+            restoreOriginalOrder();
+            return;
+        }
+        allSections.forEach(section => {
+            const grid = section.querySelector('.items-grid');
+            if (!grid) return;
+            const cards = Array.from(grid.children);
+            cards.sort((a, b) => {
+                const pa = parseInt(a.dataset.price, 10) || 0;
+                const pb = parseInt(b.dataset.price, 10) || 0;
+                if (sort === 'price-low') return pa - pb;
+                if (sort === 'price-high') return pb - pa;
+                if (sort === 'name') return a.dataset.name.localeCompare(b.dataset.name);
+                return 0;
+            });
+            cards.forEach(c => grid.appendChild(c));
+        });
+    }
+
+    // Cache original order
+    const originalOrders = new Map();
+    allSections.forEach(section => {
+        const grid = section.querySelector('.items-grid');
+        if (grid) originalOrders.set(section, Array.from(grid.children));
+    });
+    function restoreOriginalOrder() {
+        originalOrders.forEach((cards, section) => {
+            const grid = section.querySelector('.items-grid');
+            if (grid) cards.forEach(c => grid.appendChild(c));
+        });
+    }
+
+    sortSelect.addEventListener('change', applySort);
+
+    /* ═══════════════════════════════════════════════════════
+       WISHLIST
+       ═══════════════════════════════════════════════════════ */
+    function toggleFavorite(btn) {
+        const card = btn.closest('.price-card');
+        const name = card.dataset.name;
+        if (wishlist.has(name)) {
+            wishlist.delete(name);
+            card.classList.remove('favorited');
+            btn.classList.remove('active');
+            btn.innerHTML = '<i class="fa-regular fa-heart"></i>';
+            showToast('Removed from saved');
+        } else {
+            wishlist.add(name);
+            card.classList.add('favorited');
+            btn.classList.add('active');
+            btn.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            showToast('Saved to favorites ❤️');
+        }
+        localStorage.setItem('gb_wishlist', JSON.stringify(Array.from(wishlist)));
+        updateWishlistBadge();
+        if (wishlistFilterActive) applyFilters();
+    }
+
+    function updateWishlistBadge() {
+        const badge = document.getElementById('wishlistBadge');
+        badge.textContent = wishlist.size;
+        badge.classList.toggle('show', wishlist.size > 0);
+    }
+
+    function toggleWishlistFilter() {
+        wishlistFilterActive = !wishlistFilterActive;
+        const btn = document.getElementById('wishlistToggle');
+        btn.classList.toggle('active', wishlistFilterActive);
+        if (wishlistFilterActive && wishlist.size === 0) {
+            showToast('No favorites yet — tap the heart on any service');
+        }
+        applyFilters();
+    }
+
+    // Restore wishlist visuals on load
+    allCards.forEach(card => {
+        if (wishlist.has(card.dataset.name)) {
+            card.classList.add('favorited');
+            const heart = card.querySelector('.heart-btn');
+            if (heart) {
+                heart.classList.add('active');
+                heart.innerHTML = '<i class="fa-solid fa-heart"></i>';
+            }
+        }
+    });
+    updateWishlistBadge();
+
+    /* ═══════════════════════════════════════════════════════
+       QUICK VIEW
+       ═══════════════════════════════════════════════════════ */
+    function openQuickView(btn) {
+        const card = btn.closest('.price-card');
+        currentQuickView = card;
+
+        document.getElementById('qvCategory').querySelector('span').textContent = 
+            (card.dataset.category || 'spa').charAt(0).toUpperCase() + (card.dataset.category || 'spa').slice(1);
+        document.getElementById('qvTitle').textContent = card.dataset.name;
+        document.getElementById('qvPrice').textContent = 
+            parseInt(card.dataset.price) === 0 ? 'Ask Us' : formatNaira(parseInt(card.dataset.price));
+        document.getElementById('qvDesc').textContent = card.dataset.desc || 'A signature treatment from Gift Beauty and Spa Zone.';
+        document.getElementById('qvDuration').textContent = card.dataset.duration || '60 mins';
+
+        document.getElementById('quickViewOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+
+        // Track recently viewed
+        const name = card.dataset.name;
+        recentlyViewed = [name, ...recentlyViewed.filter(n => n !== name)].slice(0, 6);
+        localStorage.setItem('gb_recent', JSON.stringify(recentlyViewed));
+        renderRecentlyViewed();
+    }
+
+    function closeQuickView() {
+        document.getElementById('quickViewOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+        currentQuickView = null;
+    }
+
+    document.getElementById('quickViewOverlay').addEventListener('click', (e) => {
+        if (e.target.id === 'quickViewOverlay') closeQuickView();
+    });
+
+    function qvAddToBag() {
+        if (!currentQuickView) return;
+        const addBtn = currentQuickView.querySelector('.add-btn');
+        if (addBtn && !addBtn.disabled) addToBag(addBtn);
+        closeQuickView();
+    }
+
+    function qvBookNow() {
+        if (!currentQuickView) return;
+        const bookBtn = currentQuickView.querySelector('.book-btn');
+        if (bookBtn) bookBtn.click();
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RECENTLY VIEWED
+       ═══════════════════════════════════════════════════════ */
+    function renderRecentlyViewed() {
+        const section = document.getElementById('recentSection');
+        const list = document.getElementById('recentList');
+        if (!section || !list) return;
+        if (recentlyViewed.length === 0) {
+            section.classList.remove('show');
+            return;
+        }
+        section.classList.add('show');
+        list.innerHTML = recentlyViewed.map(name => {
+            const card = allCards.find(c => c.dataset.name === name);
+            if (!card) return '';
+            const price = parseInt(card.dataset.price) || 0;
+            return `<div class="recent-item" onclick="scrollToCard('${escapeAttr(name)}')">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>${escapeHtml(name)}</span>
+                <span style="color:var(--gold);font-weight:700;">${price === 0 ? 'Ask' : formatNaira(price)}</span>
+            </div>`;
+        }).join('');
+    }
+
+    function scrollToCard(name) {
+        const card = allCards.find(c => c.dataset.name === name);
+        if (!card) return;
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        card.classList.add('glow-pulse');
+        setTimeout(() => card.classList.remove('glow-pulse'), 1600);
+    }
+
+    renderRecentlyViewed();
+
+    /* ═══════════════════════════════════════════════════════
+       SPA BAG / CART
+       ═══════════════════════════════════════════════════════ */
+    function addToBag(btn) {
+        const card = btn.closest('.price-card');
+        const name = card.dataset.name;
+        const price = parseInt(card.dataset.price, 10) || 0;
+        if (price === 0) { showToast('Price on request — chat with us!'); return; }
+
+        const existing = bag.find(i => i.name === name);
+        if (existing) existing.qty++;
+        else bag.push({ name, price, qty: 1 });
+
+        card.classList.add('in-bag');
+        btn.classList.add('in-bag');
+        btn.innerHTML = '<i class="fa-solid fa-check"></i>';
+        showToast('Added: ' + name);
+        updateBagUI();
+        fireConfetti(15);
+    }
+
+    function removeFromBag(name) {
+        bag = bag.filter(i => i.name !== name);
+        allCards.forEach(card => {
+            if (card.dataset.name === name) {
+                card.classList.remove('in-bag');
+                const b = card.querySelector('.add-btn');
+                if (b) { b.classList.remove('in-bag'); b.innerHTML = '<i class="fa-solid fa-plus"></i>'; }
+            }
+        });
+        updateBagUI();
+        renderCart();
+    }
+
+    function changeQty(name, delta) {
+        const item = bag.find(i => i.name === name);
+        if (!item) return;
+        item.qty += delta;
+        if (item.qty <= 0) { removeFromBag(name); return; }
+        updateBagUI();
+        renderCart();
+    }
+
+    function calculateTotals() {
+        const subtotal = bag.reduce((s, i) => s + i.qty * i.price, 0);
+        const itemCount = bag.reduce((s, i) => s + i.qty, 0);
+        const discount = itemCount >= 2 ? Math.round(subtotal * 0.10) : 0;
+        const total = subtotal - discount;
+        const points = Math.floor(total / 1000);
+        return { subtotal, discount, total, points, itemCount };
+    }
+
+    function updateBagUI() {
+        const { itemCount, total } = calculateTotals();
+        document.getElementById('bagCount').textContent = itemCount;
+        document.getElementById('bagPillTotal').textContent = formatNaira(total);
+        document.getElementById('spaBagPill').classList.toggle('show', itemCount > 0);
+    }
+
+    function openCart() {
+        if (bag.length === 0) { showToast('Your spa bag is empty — add a treatment first'); return; }
+        renderCart();
+        document.getElementById('cartOverlay').classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    function closeCart() {
+        document.getElementById('cartOverlay').classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    document.getElementById('cartOverlay').addEventListener('click', (e) => {
+        if (e.target.id === 'cartOverlay') closeCart();
+    });
+
+    function renderCart() {
+        const body = document.getElementById('cartBody');
+        const { subtotal, discount, total, points, itemCount } = calculateTotals();
+
+        if (bag.length === 0) {
+            body.innerHTML = '<div class="cart-empty"><i class="fa-solid fa-bag-shopping"></i><p>Your spa bag is empty</p><span>Tap + on any treatment to add it</span></div>';
+            document.getElementById('cartSubtotal').textContent = '₦0';
+            document.getElementById('cartTotal').textContent = '₦0';
+            document.getElementById('cartDiscount').textContent = '-₦0';
+            document.getElementById('discountRow').classList.remove('show');
+            document.getElementById('discountHint').classList.remove('show');
+            document.getElementById('pointsEarned').textContent = '0';
+            document.getElementById('cartBookBtn').disabled = true;
+            return;
+        }
+
+        document.getElementById('cartBookBtn').disabled = false;
+
+        body.innerHTML = bag.map(item => `
+            <div class="cart-item">
+                <div class="cart-item-info">
+                    <span class="cart-item-name">${escapeHtml(item.name)}</span>
+                    <span class="cart-item-price">${formatNaira(item.price * item.qty)}</span>
+                </div>
+                <div class="qty-controls">
+                    <button class="qty-btn" onclick="changeQty('${escapeAttr(item.name)}', -1)"><i class="fa-solid fa-minus"></i></button>
+                    <span class="qty-value">${item.qty}</span>
+                    <button class="qty-btn" onclick="changeQty('${escapeAttr(item.name)}', 1)"><i class="fa-solid fa-plus"></i></button>
+                </div>
+            </div>
+        `).join('');
+
+        document.getElementById('cartSubtotal').textContent = formatNaira(subtotal);
+        document.getElementById('cartTotal').textContent = formatNaira(total);
+        document.getElementById('discountRow').classList.toggle('show', discount > 0);
+        document.getElementById('cartDiscount').textContent = '-' + formatNaira(discount);
+        document.getElementById('discountHint').classList.toggle('show', itemCount === 1);
+        document.getElementById('pointsEarned').textContent = points;
+    }
+
+    function bookBag() {
+        if (bag.length === 0) return;
+        const { subtotal, discount, total, points } = calculateTotals();
+
+        let text = 'Hello Gift Beauty ✨,\n\n';
+        text += 'I would like to book the following treatments:\n\n';
+        bag.forEach(item => {
+            text += `• ${item.qty}x ${item.name} — ${formatNaira(item.price * item.qty)}\n`;
+        });
+        text += `\nSubtotal: ${formatNaira(subtotal)}\n`;
+        if (discount > 0) text += `Bundle Discount (10%): -${formatNaira(discount)}\n`;
+        text += `*Total: ${formatNaira(total)}*\n`;
+        text += `Loyalty points earned: ${points} ⭐\n\n`;
+        text += 'Please confirm my booking and available times.';
+
+        fireConfetti(90);
+
+        setTimeout(() => {
+            window.open('https://wa.me/2349053224196?text=' + encodeURIComponent(text), '_blank');
+            closeCart();
+        }, 350);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       FEELING LUCKY
+       ═══════════════════════════════════════════════════════ */
+    function feelingLucky() {
+        const visibleCards = allCards.filter(c => !c.classList.contains('hide'));
+        if (visibleCards.length === 0) {
+            showToast('No treatments to pick from — clear filters');
+            return;
+        }
+        const pick = visibleCards[Math.floor(Math.random() * visibleCards.length)];
+        pick.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        pick.classList.add('shake', 'glow-pulse');
+        setTimeout(() => pick.classList.remove('shake', 'glow-pulse'), 2000);
+        showToast('🎲 Lucky pick: ' + pick.dataset.name);
+        fireConfetti(30);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       TOAST + CONFETTI
+       ═══════════════════════════════════════════════════════ */
+    let toastTimer;
+    function showToast(msg, isError) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toastText').textContent = msg;
+        toast.classList.toggle('error', !!isError);
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+    }
+
+    function fireConfetti(count) {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        const colors = ['#FFD700', '#FFF2B2', '#C5A059', '#25D366', '#FFFFFF', '#ff3b5c'];
+        const n = count || 60;
+        for (let i = 0; i < n; i++) {
+            const p = document.createElement('div');
+            p.className = 'confetti-piece';
+            p.style.background = colors[Math.floor(Math.random() * colors.length)];
+            p.style.left = (50 + (Math.random() - 0.5) * 40) + 'vw';
+            p.style.top = '50vh';
+            if (Math.random() > 0.6) p.style.borderRadius = '50%';
+            document.body.appendChild(p);
+
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 150 + Math.random() * 400;
+            const dx = Math.cos(angle) * dist;
+            const dy = Math.sin(angle) * dist - 200;
+            const rot = (Math.random() - 0.5) * 1200;
+
+            p.animate(
+                [
+                    { transform: 'translate(0,0) rotate(0deg)', opacity: 1 },
+                    { transform: `translate(${dx}px, ${dy + 400}px) rotate(${rot}deg)`, opacity: 0 }
+                ],
+                {
+                    duration: 1200 + Math.random() * 700,
+                    easing: 'cubic-bezier(0.16,1,0.3,1)',
+                    fill: 'forwards'
+                }
+            ).onfinish = () => p.remove();
+        }
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       CATEGORY NAV ACTIVE STATE
+       ═══════════════════════════════════════════════════════ */
+    (function initCategoryActive() {
+        const navLinks = document.querySelectorAll('.category-nav a');
+        if (!('IntersectionObserver' in window)) return;
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const id = entry.target.id;
+                    navLinks.forEach(a => a.classList.toggle('active', a.dataset.target === id));
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '-180px 0px -55% 0px' });
+        allSections.forEach(s => obs.observe(s));
+    })();
+
+    /* ═══════════════════════════════════════════════════════
+       3D TILT ON CARDS (desktop)
+       ═══════════════════════════════════════════════════════ */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        allCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform = `perspective(900px) rotateY(${(x*5).toFixed(2)}deg) rotateX(${(-y*5).toFixed(2)}deg) translateY(-3px)`;
+            });
+            card.addEventListener('mouseleave', () => { card.style.transform = ''; });
+        });
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       RIPPLE ON CLICK
+       ═══════════════════════════════════════════════════════ */
+    document.addEventListener('click', (e) => {
+        const target = e.target.closest('.icon-btn, .lucky-btn, .qv-btn, .cart-book-btn, .wishlist-toggle, .search-clear');
+        if (!target) return;
+        const r = target.getBoundingClientRect();
+        const ripple = document.createElement('span');
+        ripple.style.cssText = `
+            position: absolute;
+            width: ${Math.max(r.width, r.height)}px;
+            height: ${Math.max(r.width, r.height)}px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            top: ${e.clientY - r.top}px;
+            left: ${e.clientX - r.left}px;
+            transform: translate(-50%,-50%) scale(0);
+            pointer-events: none;
+            z-index: 10;
+        `;
+        if (getComputedStyle(target).position === 'static') {
+            target.style.position = 'relative';
+        }
+        target.style.overflow = 'hidden';
+        target.appendChild(ripple);
+        ripple.animate(
+            [{ transform: 'translate(-50%,-50%) scale(0)', opacity: 0.7 }, { transform: 'translate(-50%,-50%) scale(2)', opacity: 0 }],
+            { duration: 600, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'forwards' }
+        ).onfinish = () => ripple.remove();
+    });
+
+    /* ═══════════════════════════════════════════════════════
+       KEYBOARD
+       ═══════════════════════════════════════════════════════ */
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+            e.preventDefault();
+            searchInput.focus();
+            searchInput.select();
+        }
+        if (e.key === 'Escape') {
+            if (document.getElementById('cartOverlay').classList.contains('open')) closeCart();
+            if (document.getElementById('quickViewOverlay').classList.contains('open')) closeQuickView();
+        }
+        if (e.key === '/' && document.activeElement.tagName !== 'INPUT') {
+            e.preventDefault();
+            searchInput.focus();
+        }
+    });
+
+    /* ═══════════════════════════════════════════════════════
+       INITIALIZE
+       ═══════════════════════════════════════════════════════ */
+    updateBagUI();
+    applyFilters();
+    </script>
+</body>
+</html>

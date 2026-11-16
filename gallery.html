@@ -1,0 +1,2237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | Gift Beauty and Spa Zone</title>
+    <meta name="description" content="Explore the luxury gallery of Gift Beauty and Spa Zone in Lekki Phase 1, Lagos. 24/7 Luxury Spa.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-dark: #070504;
+            --bg-card: #120F0D;
+            --bg-card-hover: #1E1813;
+            --gold: #FFD700;
+            --gold-light: #FFF2B2;
+            --gold-dark: #C5A059;
+            --gold-gradient: linear-gradient(135deg, #FFF2B2 0%, #FFD700 40%, #C5A059 80%, #997425 100%);
+            --white: #FFFFFF;
+            --text-muted: #C5BFBA;
+            --border-gold: rgba(255, 215, 0, 0.5);
+            --neon-glow: 0 0 30px rgba(255, 215, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+            padding-bottom: 90px;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-dark); }
+        ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+        ::selection { background: var(--gold); color: var(--bg-dark); }
+
+        /* --- SCROLL REVEAL --- */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.9s cubic-bezier(0.16,1,0.3,1), transform 0.9s cubic-bezier(0.16,1,0.3,1);
+        }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* --- FLASHING PROMO TICKER BAR --- */
+        .promo-ticker {
+            background: var(--gold-gradient);
+            color: var(--bg-dark);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            padding: 8px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1003;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.6);
+        }
+        .ticker-track {
+            display: inline-block;
+            animation: tickerScroll 25s linear infinite;
+        }
+        @keyframes tickerScroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* --- TOP CONTACT BAR --- */
+        .top-bar {
+            background: rgba(10, 7, 5, 0.98);
+            border-bottom: 1px solid var(--border-gold);
+            padding: 8px 5%;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: var(--gold-light);
+            text-align: center;
+            position: fixed;
+            top: 33px;
+            width: 100%;
+            z-index: 1002;
+        }
+        .top-bar a { color: var(--gold); text-decoration: none; font-weight: 600; }
+        @media (min-width: 768px) {
+            .top-bar { text-align: left; display: flex; justify-content: space-between; align-items: center; }
+        }
+
+        /* --- NAVBAR --- */
+        header {
+            position: fixed;
+            top: 65px;
+            width: 100%;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s ease;
+            background: rgba(7, 5, 4, 0.9);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        @media (max-width: 768px) { header { top: 68px; } }
+
+        .logo-container { display: flex; align-items: center; gap: 12px; text-decoration: none; }
+
+        .logo-badge-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid var(--gold);
+            object-fit: cover;
+            box-shadow: var(--neon-glow);
+            animation: pulseAura 2s infinite alternate;
+        }
+        @keyframes pulseAura {
+            0% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); }
+        }
+
+        .logo-text {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--white);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+        .logo-text span {
+            display: block;
+            font-size: 0.65rem;
+            color: var(--gold);
+            letter-spacing: 2px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 600;
+        }
+
+        .hamburger-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+        .hamburger-btn:hover { background: var(--gold); color: var(--bg-dark); transform: scale(1.1) rotate(90deg); }
+
+        .nav-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 5%;
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            border-radius: 16px;
+            width: 240px;
+            padding: 15px 0;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.95);
+            display: none;
+            flex-direction: column;
+            z-index: 1005;
+            animation: dropdownFade 0.3s ease;
+        }
+        .nav-dropdown.active { display: flex; }
+        @keyframes dropdownFade { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .nav-dropdown a {
+            padding: 14px 22px;
+            color: var(--white);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.15);
+            transition: color 0.3s, background 0.3s, padding 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .nav-dropdown a i { color: var(--gold); font-size: 0.85rem; }
+        .nav-dropdown a:last-child { border-bottom: none; }
+        .nav-dropdown a:hover { color: var(--bg-dark); background: var(--gold); padding-left: 30px; }
+
+        /* --- PAGE HEADER --- */
+        .page-header {
+            padding: 178px 20px 70px;
+            text-align: center;
+            background: linear-gradient(rgba(7,5,4,0.82), rgba(7,5,4,0.97)), url('hero-bg.png') center/cover;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-gold);
+        }
+
+        .sparkles { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .sparkles span {
+            position: absolute;
+            background: var(--gold);
+            border-radius: 50%;
+            opacity: 0;
+            box-shadow: 0 0 10px var(--gold);
+            animation: floatUp 7s ease-in-out infinite;
+        }
+        @keyframes floatUp {
+            0%, 100% { opacity: 0; transform: translateY(0) scale(0.4); }
+            50% { opacity: 0.9; transform: translateY(-45px) scale(1); }
+        }
+
+        .page-header h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            margin-bottom: 12px;
+            font-style: italic;
+            background: linear-gradient(90deg, #C5A059, #FFF2B2, #FFD700, #FFF2B2, #C5A059);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmerText 4s linear infinite;
+            filter: drop-shadow(0 0 25px rgba(255, 215, 0, 0.35));
+        }
+        @keyframes shimmerText { to { background-position: 200% center; } }
+
+        .page-header p {
+            font-size: 1rem;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            max-width: 620px;
+            margin: 0 auto;
+        }
+        .gold-line {
+            width: 90px;
+            height: 3px;
+            background: var(--gold);
+            margin: 22px auto 0;
+            box-shadow: 0 0 14px var(--gold);
+            border-radius: 3px;
+        }
+
+        /* --- SECTION HEADINGS --- */
+        .section-head { text-align: center; margin-bottom: 34px; }
+        .section-head h2 {
+            font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+            color: var(--gold-light);
+            font-style: italic;
+            letter-spacing: 0.5px;
+        }
+        .section-head p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 6px;
+        }
+
+        /* ============================================
+           HERO MORPHING SLIDER  (BIG)
+           ============================================ */
+        .gallery-slider-section {
+            padding: 70px 20px 40px;
+            max-width: 1100px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: clamp(360px, 56vw, 580px);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            perspective: 1400px;
+        }
+
+        .slide-item {
+            position: absolute;
+            width: clamp(270px, 45vw, 480px);
+            height: clamp(270px, 45vw, 480px);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity 0.8s cubic-bezier(0.4,0,0.2,1),
+                        transform 0.9s cubic-bezier(0.34,1.4,0.5,1),
+                        filter 0.8s ease;
+            pointer-events: none;
+            filter: blur(4px);
+        }
+
+        .slide-media {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--gold);
+            background: var(--bg-card);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.9), var(--neon-glow);
+            border-radius: 35% 65% 65% 35% / 40% 45% 55% 60%;
+            animation: morphShape 9s ease-in-out infinite alternate;
+        }
+        .slide-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 1.2s ease;
+            transform: scale(1.02);
+        }
+
+        @keyframes morphShape {
+            0%   { border-radius: 35% 65% 65% 35% / 40% 45% 55% 60%; }
+            50%  { border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%; }
+            100% { border-radius: 65% 35% 40% 60% / 60% 40% 60% 40%; }
+        }
+
+        /* Active */
+        .slide-item.active {
+            opacity: 1;
+            transform: scale(1) translateX(0) rotateY(0deg);
+            filter: blur(0);
+            z-index: 3;
+            pointer-events: auto;
+        }
+        .slide-item.active .slide-media {
+            box-shadow: 0 30px 80px rgba(0,0,0,0.95), 0 0 60px rgba(255,215,0,0.45);
+        }
+        .slide-item.active .slide-media img { transform: scale(1.06); }
+
+        /* Peeking siblings */
+        .slide-item.prev {
+            opacity: 0.32;
+            transform: scale(0.66) translateX(-78%) rotateY(16deg);
+            filter: blur(3px) brightness(0.55);
+            z-index: 1;
+        }
+        .slide-item.next {
+            opacity: 0.32;
+            transform: scale(0.66) translateX(78%) rotateY(-16deg);
+            filter: blur(3px) brightness(0.55);
+            z-index: 1;
+        }
+
+        .slide-caption {
+            position: absolute;
+            bottom: -6px;
+            left: 50%;
+            transform: translateX(-50%) translateY(8px);
+            background: rgba(7, 5, 4, 0.92);
+            border: 1px solid var(--border-gold);
+            padding: 8px 24px;
+            border-radius: 50px;
+            color: var(--gold-light);
+            font-family: 'Playfair Display', serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.85), 0 0 20px rgba(255,215,0,0.25);
+            opacity: 0;
+            transition: all 0.6s ease 0.25s;
+            z-index: 5;
+        }
+        .slide-item.active .slide-caption {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Expand button on active slide */
+        .slide-expand {
+            position: absolute;
+            top: 18px;
+            right: 22px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: rgba(7,5,4,0.78);
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            cursor: pointer;
+            z-index: 6;
+            opacity: 0;
+            transform: scale(0.6);
+            transition: all 0.4s ease 0.35s;
+            backdrop-filter: blur(6px);
+        }
+        .slide-item.active .slide-expand { opacity: 1; transform: scale(1); }
+        .slide-expand:hover { background: var(--gold); color: var(--bg-dark); box-shadow: 0 0 22px var(--gold); }
+
+        /* Autoplay progress bar */
+        .slider-progress-track {
+            width: min(320px, 70%);
+            height: 3px;
+            background: rgba(255,215,0,0.15);
+            border-radius: 3px;
+            margin: 34px auto 0;
+            overflow: hidden;
+        }
+        .slider-progress {
+            height: 100%;
+            width: 0;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 12px var(--gold);
+            border-radius: 3px;
+        }
+        .slider-progress.run { animation: progressFill 5000ms linear forwards; }
+        .slider-progress.paused { animation-play-state: paused; }
+        @keyframes progressFill { from { width: 0; } to { width: 100%; } }
+
+        /* Slider Controls */
+        .slider-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 18px;
+            margin-top: 22px;
+        }
+
+        .slider-btn {
+            background: var(--bg-card);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 52px; height: 52px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 18px rgba(255,215,0,0.28);
+        }
+        .slider-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            transform: scale(1.12);
+            box-shadow: 0 0 34px rgba(255,215,0,0.75);
+        }
+        .slider-btn:active { transform: scale(0.94); }
+
+        .slider-counter {
+            font-family: 'Playfair Display', serif;
+            font-size: 1rem;
+            color: var(--gold-light);
+            letter-spacing: 3px;
+            min-width: 70px;
+        }
+        .slider-counter b { color: var(--gold); font-size: 1.2rem; }
+
+        /* Dots */
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 22px;
+            flex-wrap: wrap;
+        }
+        .dot {
+            width: 11px; height: 11px;
+            border-radius: 50%;
+            background: transparent;
+            border: 2px solid var(--border-gold);
+            cursor: pointer;
+            transition: all 0.35s ease;
+        }
+        .dot:hover { border-color: var(--gold); transform: scale(1.25); }
+        .dot.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            width: 30px;
+            border-radius: 6px;
+            box-shadow: 0 0 14px var(--gold);
+        }
+
+        /* Thumbnail strip */
+        .thumb-strip {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+            overflow-x: auto;
+            padding: 6px 4px 14px;
+            scrollbar-width: none;
+        }
+        .thumb-strip::-webkit-scrollbar { display: none; }
+        .thumb {
+            flex: 0 0 auto;
+            width: 72px; height: 72px;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 2px solid rgba(255,215,0,0.25);
+            cursor: pointer;
+            transition: all 0.35s ease;
+            opacity: 0.55;
+            filter: grayscale(60%);
+        }
+        .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .thumb:hover { opacity: 0.9; transform: translateY(-4px); filter: grayscale(0); }
+        .thumb.active {
+            opacity: 1;
+            border-color: var(--gold);
+            filter: grayscale(0);
+            transform: translateY(-5px) scale(1.06);
+            box-shadow: 0 0 22px rgba(255,215,0,0.65);
+        }
+
+        /* ============================================
+           FILTER BAR
+           ============================================ */
+        .filter-bar {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 42px;
+        }
+        .filter-btn {
+            font-family: 'Montserrat', sans-serif;
+            background: transparent;
+            border: 1.5px solid rgba(255,215,0,0.32);
+            color: var(--text-muted);
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.35s ease;
+        }
+        .filter-btn:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-2px); }
+        .filter-btn.active {
+            background: var(--gold-gradient);
+            color: var(--bg-dark);
+            border-color: transparent;
+            box-shadow: 0 6px 24px rgba(255,215,0,0.45);
+        }
+
+        /* ============================================
+           MASONRY GRID GALLERY
+           ============================================ */
+        .gallery-grid-section {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 40px 20px 90px;
+        }
+
+        .masonry {
+            columns: 3;
+            column-gap: 18px;
+        }
+        @media (max-width: 900px) { .masonry { columns: 2; } }
+        @media (max-width: 560px) { .masonry { columns: 1; } }
+
+        .grid-card {
+            break-inside: avoid;
+            margin-bottom: 18px;
+            position: relative;
+            border-radius: 18px;
+            overflow: hidden;
+            cursor: pointer;
+            border: 1px solid rgba(255,215,0,0.2);
+            background: var(--bg-card);
+            transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.45s cubic-bezier(0.34,1.4,0.5,1);
+            will-change: transform;
+            display: block;
+        }
+        .grid-card.hide {
+            display: none;
+        }
+        .grid-card img {
+            width: 100%;
+            display: block;
+            transition: transform 0.9s cubic-bezier(0.16,1,0.3,1), filter 0.5s ease;
+            filter: saturate(0.92) brightness(0.92);
+        }
+        .grid-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 20px 55px rgba(0,0,0,0.85), 0 0 40px rgba(255,215,0,0.3);
+        }
+        .grid-card:hover img {
+            transform: scale(1.09);
+            filter: saturate(1.15) brightness(1.02);
+        }
+
+        .grid-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(7,5,4,0.95) 0%, rgba(7,5,4,0.35) 42%, transparent 75%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.45s ease;
+        }
+        .grid-card:hover .grid-overlay { opacity: 1; }
+
+        .grid-overlay h4 {
+            font-size: 1.05rem;
+            color: var(--gold-light);
+            font-style: italic;
+            transform: translateY(14px);
+            transition: transform 0.45s ease 0.05s;
+        }
+        .grid-overlay span {
+            font-size: 0.65rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-top: 3px;
+            transform: translateY(14px);
+            transition: transform 0.45s ease 0.12s;
+        }
+        .grid-card:hover .grid-overlay h4,
+        .grid-card:hover .grid-overlay span { transform: translateY(0); }
+
+        .grid-zoom-badge {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: rgba(7,5,4,0.7);
+            border: 1.5px solid var(--gold);
+            color: var(--gold);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.8rem;
+            backdrop-filter: blur(5px);
+            opacity: 0;
+            transform: scale(0.6) rotate(-45deg);
+            transition: all 0.4s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        .grid-card:hover .grid-zoom-badge {
+            opacity: 1;
+            transform: scale(1) rotate(0deg);
+        }
+
+        /* ============================================
+           LIGHTBOX
+           ============================================ */
+        .lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(3, 2, 1, 0.97);
+            backdrop-filter: blur(14px);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+            padding: 20px;
+        }
+        .lightbox.open { opacity: 1; visibility: visible; }
+
+        .lb-img-wrap {
+            position: relative;
+            max-width: 94vw;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transform: scale(0.9);
+            transition: transform 0.5s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        .lightbox.open .lb-img-wrap { transform: scale(1); }
+
+        .lb-img-wrap img {
+            max-width: 94vw;
+            max-height: 74vh;
+            object-fit: contain;
+            border-radius: 14px;
+            border: 2px solid var(--gold);
+            box-shadow: 0 0 80px rgba(255,215,0,0.35), 0 30px 80px rgba(0,0,0,0.9);
+            animation: lbZoomIn 0.5s cubic-bezier(0.34,1.4,0.5,1);
+        }
+        @keyframes lbZoomIn {
+            from { opacity: 0; transform: scale(0.94); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .lb-caption {
+            margin-top: 18px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            font-style: italic;
+            color: var(--gold-light);
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+        .lb-counter {
+            margin-top: 6px;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .lb-btn {
+            position: absolute;
+            background: rgba(18,15,13,0.85);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            width: 54px; height: 54px;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.15rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(6px);
+        }
+        .lb-btn:hover { background: var(--gold); color: var(--bg-dark); box-shadow: 0 0 30px var(--gold); transform: scale(1.1); }
+
+        .lb-close { top: 22px; right: 22px; }
+        .lb-prev { left: 20px; top: 50%; transform: translateY(-50%); }
+        .lb-next { right: 20px; top: 50%; transform: translateY(-50%); }
+        .lb-prev:hover { transform: translateY(-50%) scale(1.1); }
+        .lb-next:hover { transform: translateY(-50%) scale(1.1); }
+
+        @media (max-width: 640px) {
+            .lb-btn { width: 44px; height: 44px; font-size: 1rem; }
+            .lb-close { top: 14px; right: 14px; }
+            .lb-prev { left: 10px; }
+            .lb-next { right: 10px; }
+            .slide-item.prev, .slide-item.next { opacity: 0; }
+            .slide-expand { opacity: 1; transform: scale(1); top: 12px; right: 14px; width: 36px; height: 36px; }
+        }
+
+        /* --- STICKY BOTTOM BAR --- */
+        .bottom-bar {
+            position: fixed;
+            bottom: 0; left: 0;
+            width: 100%;
+            height: 80px;
+            background: rgba(7, 5, 4, 0.98);
+            backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -10px 30px rgba(0,0,0,0.9);
+            z-index: 2000;
+            border-top: 2px solid var(--border-gold);
+            padding: 0 15px;
+        }
+        .bottom-bar a {
+            text-decoration: none;
+            color: var(--text-muted);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s, transform 0.3s;
+        }
+        .bottom-bar a i { font-size: 1.3rem; margin-bottom: 4px; color: var(--gold); }
+        .bottom-bar a:hover { color: var(--gold); transform: translateY(-3px); }
+
+        .bottom-book-btn {
+            background: var(--gold-gradient) !important;
+            color: var(--bg-dark) !important;
+            padding: 12px 28px !important;
+            border-radius: 50px !important;
+            flex-direction: row !important;
+            gap: 10px !important;
+            font-size: 0.8rem !important;
+            font-weight: 700 !important;
+            box-shadow: 0 5px 20px rgba(255, 215, 0, 0.6);
+            animation: bookPulse 2.2s ease-in-out infinite;
+        }
+        @keyframes bookPulse {
+            0%, 100% { box-shadow: 0 5px 20px rgba(255,215,0,0.45); }
+            50% { box-shadow: 0 5px 34px rgba(255,215,0,0.9); }
+        }
+        .bottom-book-btn i { color: var(--bg-dark) !important; margin-bottom: 0 !important; font-size: 1.1rem !important; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #030201;
+            text-align: center;
+            padding: 50px 20px 10px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 2px solid var(--border-gold);
+        }
+        .dev-tag-box { background: #030201; text-align: center; padding: 0 20px 25px; }
+        .dev-website-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 215, 0, 0.08);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            color: var(--text-muted);
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+        .dev-website-btn i { color: var(--gold); font-size: 0.8rem; }
+        .dev-website-btn:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            border-color: var(--gold);
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+        .dev-website-btn:hover i { color: var(--bg-dark); }
+
+        /* ============================================================
+           ★★★  EXTRA EFFECT LAYER  ★★★
+           ============================================================ */
+
+        /* --- PRELOADER --- */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(circle at 50% 45%, #120E0A 0%, #070504 70%);
+            z-index: 100000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 26px;
+            transition: opacity 0.9s ease, visibility 0.9s ease;
+        }
+        #preloader.done { opacity: 0; visibility: hidden; pointer-events: none; }
+
+        .loader-ring {
+            width: 86px; height: 86px;
+            border-radius: 50%;
+            border: 2px solid rgba(255,215,0,0.12);
+            border-top-color: var(--gold);
+            border-right-color: rgba(255,215,0,0.55);
+            animation: spinRing 1s linear infinite;
+            box-shadow: 0 0 45px rgba(255,215,0,0.35), inset 0 0 25px rgba(255,215,0,0.12);
+        }
+        @keyframes spinRing { to { transform: rotate(360deg); } }
+
+        .loader-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 0.75rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: var(--gold);
+            animation: loaderPulse 1.6s ease-in-out infinite;
+        }
+        @keyframes loaderPulse { 0%,100% { opacity: .35; } 50% { opacity: 1; text-shadow: 0 0 20px var(--gold); } }
+
+        /* --- SCROLL PROGRESS --- */
+        #scrollProgress {
+            position: fixed;
+            top: 0; left: 0;
+            height: 3px;
+            width: 0%;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 14px var(--gold), 0 0 30px rgba(255,215,0,.55);
+            z-index: 99999;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* --- AURORA BACKGROUND BLOBS --- */
+        .aurora {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .aurora span {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.20;
+            mix-blend-mode: screen;
+            will-change: transform;
+        }
+        .aurora span:nth-child(1) {
+            width: 480px; height: 480px;
+            background: #FFD700;
+            top: -120px; left: -100px;
+            animation: drift1 22s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(2) {
+            width: 420px; height: 420px;
+            background: #C5A059;
+            bottom: -140px; right: -80px;
+            animation: drift2 26s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(3) {
+            width: 360px; height: 360px;
+            background: #FFB347;
+            top: 42%; left: 55%;
+            animation: drift3 19s ease-in-out infinite alternate;
+        }
+        .aurora span:nth-child(4) {
+            width: 300px; height: 300px;
+            background: #8A5A00;
+            top: 15%; right: 20%;
+            animation: drift1 30s ease-in-out infinite alternate-reverse;
+        }
+        @keyframes drift1 {
+            from { transform: translate(0,0) scale(1); }
+            to   { transform: translate(180px, 140px) scale(1.35); }
+        }
+        @keyframes drift2 {
+            from { transform: translate(0,0) scale(1.1); }
+            to   { transform: translate(-200px, -120px) scale(0.9); }
+        }
+        @keyframes drift3 {
+            from { transform: translate(0,0) scale(0.9); }
+            to   { transform: translate(-140px, 180px) scale(1.3); }
+        }
+
+        /* --- FIREFLIES --- */
+        .fireflies {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            overflow: hidden;
+        }
+        .firefly {
+            position: absolute;
+            width: 3px; height: 3px;
+            border-radius: 50%;
+            background: var(--gold-light);
+            box-shadow: 0 0 10px 2px rgba(255,215,0,.8);
+            opacity: 0;
+            animation: fireflyFloat linear infinite;
+        }
+        @keyframes fireflyFloat {
+            0%   { opacity: 0; transform: translateY(0) translateX(0) scale(.4); }
+            12%  { opacity: .9; }
+            50%  { opacity: .55; transform: translateY(-45vh) translateX(28px) scale(1); }
+            88%  { opacity: .85; }
+            100% { opacity: 0; transform: translateY(-92vh) translateX(-22px) scale(.35); }
+        }
+
+        /* --- FILM GRAIN --- */
+        .grain {
+            position: fixed;
+            inset: 0;
+            z-index: 9997;
+            pointer-events: none;
+            opacity: 0.035;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+            animation: grainShift 0.9s steps(4) infinite;
+        }
+        @keyframes grainShift {
+            0%   { transform: translate(0,0); }
+            25%  { transform: translate(-2%, 1%); }
+            50%  { transform: translate(1%, -2%); }
+            75%  { transform: translate(-1%, 2%); }
+            100% { transform: translate(0,0); }
+        }
+
+        /* --- CUSTOM CURSOR --- */
+        .cursor-dot, .cursor-ring {
+            position: fixed;
+            top: 0; left: 0;
+            pointer-events: none;
+            z-index: 99999;
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: opacity .3s ease;
+        }
+        .cursor-dot {
+            width: 6px; height: 6px;
+            background: var(--gold);
+            box-shadow: 0 0 14px 3px rgba(255,215,0,.9);
+        }
+        .cursor-ring {
+            width: 38px; height: 38px;
+            border: 1.5px solid rgba(255,215,0,.55);
+            background: rgba(255,215,0,0);
+            transition: width .35s cubic-bezier(.34,1.4,.5,1),
+                        height .35s cubic-bezier(.34,1.4,.5,1),
+                        background .35s ease,
+                        border-color .35s ease,
+                        opacity .3s ease;
+        }
+        body.custom-cursor .cursor-dot,
+        body.custom-cursor .cursor-ring { opacity: 1; }
+        .cursor-ring.grow {
+            width: 76px; height: 76px;
+            background: rgba(255,215,0,.10);
+            border-color: var(--gold);
+            box-shadow: 0 0 40px rgba(255,215,0,.4);
+        }
+        body.custom-cursor,
+        body.custom-cursor a,
+        body.custom-cursor button,
+        body.custom-cursor .grid-card,
+        body.custom-cursor .thumb,
+        body.custom-cursor .dot { cursor: none; }
+
+        /* --- MOUSE SPARKLE TRAIL --- */
+        .trail-spark {
+            position: fixed;
+            width: 7px; height: 7px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99998;
+            background: radial-gradient(circle, #FFF2B2, #FFD700 55%, transparent 72%);
+            animation: trailFade .75s ease-out forwards;
+        }
+        @keyframes trailFade {
+            0%   { opacity: .95; transform: translate(-50%,-50%) scale(1); }
+            100% { opacity: 0;   transform: translate(-50%,-50%) scale(0.15) translateY(16px); }
+        }
+
+        /* --- RIPPLE --- */
+        .ripple-host { position: relative; overflow: hidden; }
+        .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255,215,0,.42);
+            transform: scale(0);
+            animation: rippleAnim .7s ease-out forwards;
+            pointer-events: none;
+        }
+        @keyframes rippleAnim {
+            to { transform: scale(2.6); opacity: 0; }
+        }
+
+        /* --- SHINE SWEEP ON CARDS --- */
+        .grid-card::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -75%;
+            width: 45%;
+            height: 220%;
+            background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.22) 45%, rgba(255,242,178,.5) 50%, rgba(255,255,255,.22) 55%, transparent 100%);
+            transform: rotate(22deg);
+            transition: left .85s cubic-bezier(.16,1,.3,1);
+            pointer-events: none;
+            z-index: 3;
+        }
+        .grid-card:hover::after { left: 130%; }
+
+        .slide-media::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: -80%;
+            width: 42%;
+            height: 220%;
+            background: linear-gradient(115deg, transparent, rgba(255,255,255,.28), transparent);
+            transform: rotate(20deg);
+            pointer-events: none;
+            z-index: 4;
+            opacity: 0;
+        }
+        .slide-item.active .slide-media::after {
+            animation: slideShine 3.4s ease-in-out 1.1s infinite;
+        }
+        @keyframes slideShine {
+            0%   { left: -80%; opacity: 0; }
+            15%  { opacity: 1; }
+            55%  { left: 130%; opacity: 0; }
+            100% { left: 130%; opacity: 0; }
+        }
+
+        /* --- ACTIVE SLIDE: KEN BURNS + GLOW PULSE --- */
+        .slide-item.active .slide-media {
+            animation: morphShape 9s ease-in-out infinite alternate,
+                       activeGlow 3s ease-in-out infinite alternate;
+        }
+        @keyframes activeGlow {
+            from { box-shadow: 0 30px 80px rgba(0,0,0,.95), 0 0 38px rgba(255,215,0,.30); }
+            to   { box-shadow: 0 30px 80px rgba(0,0,0,.95), 0 0 85px rgba(255,215,0,.72); }
+        }
+        .slide-item.active .slide-media img {
+            animation: kenBurns 5.6s ease-out forwards;
+        }
+        @keyframes kenBurns {
+            from { transform: scale(1.02); }
+            to   { transform: scale(1.13); }
+        }
+
+        /* --- CAPTION SHIMMER --- */
+        .slide-item.active .slide-caption {
+            background-image: linear-gradient(100deg, rgba(7,5,4,.95) 0%, rgba(7,5,4,.95) 40%, rgba(255,215,0,.25) 50%, rgba(7,5,4,.95) 60%, rgba(7,5,4,.95) 100%);
+            background-size: 260% 100%;
+            animation: captionShimmer 3.6s linear infinite;
+        }
+        @keyframes captionShimmer {
+            from { background-position: 160% 0; }
+            to   { background-position: -60% 0; }
+        }
+
+        /* --- SECTION HEAD ORNAMENT --- */
+        .section-head h2 { position: relative; display: inline-block; }
+        .section-head h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -9px;
+            width: 0;
+            height: 2px;
+            background: var(--gold-gradient);
+            box-shadow: 0 0 12px var(--gold);
+            transform: translateX(-50%);
+            transition: width .8s cubic-bezier(.16,1,.3,1);
+        }
+        .section-head.reveal.active h2::after,
+        .reveal.active .section-head h2::after { width: 64%; }
+
+        /* --- GRID CARD STAGGER REVEAL --- */
+        .grid-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .grid-card.card-in {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                        transform .7s cubic-bezier(.16,1,.3,1),
+                        border-color .4s ease,
+                        box-shadow .4s ease;
+        }
+
+        /* --- BACK TO TOP --- */
+        #backToTop {
+            position: fixed;
+            right: 18px;
+            bottom: 100px;
+            width: 48px; height: 48px;
+            border-radius: 50%;
+            background: rgba(18,15,13,.92);
+            border: 2px solid var(--gold);
+            color: var(--gold);
+            font-size: 1rem;
+            display: flex; align-items: center; justify-content: center;
+            cursor: pointer;
+            z-index: 2500;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(.7);
+            transition: all .45s cubic-bezier(.34,1.4,.5,1);
+            backdrop-filter: blur(8px);
+            box-shadow: 0 0 22px rgba(255,215,0,.35);
+        }
+        #backToTop.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        #backToTop:hover {
+            background: var(--gold);
+            color: var(--bg-dark);
+            box-shadow: 0 0 40px rgba(255,215,0,.9);
+            transform: translateY(-4px) scale(1.1);
+        }
+
+        /* --- LIGHTBOX BURST PARTICLES --- */
+        .lb-burst {
+            position: fixed;
+            top: 50%; left: 50%;
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 5100;
+            background: radial-gradient(circle, #FFF2B2, #FFD700 60%, transparent 75%);
+            box-shadow: 0 0 12px rgba(255,215,0,.9);
+        }
+
+        /* --- BOTTOM BAR GLOW LINE --- */
+        .bottom-bar::before {
+            content: '';
+            position: absolute;
+            top: -2px; left: 0;
+            width: 100%; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--gold), #FFF2B2, var(--gold), transparent);
+            background-size: 220% 100%;
+            animation: barSweep 3.2s linear infinite;
+            opacity: .85;
+        }
+        @keyframes barSweep {
+            from { background-position: 220% 0; }
+            to   { background-position: -20% 0; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+            .grid-card { opacity: 1 !important; transform: none !important; }
+        }
+
+        @media (hover: none) {
+            .cursor-dot, .cursor-ring { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== PRELOADER ===== -->
+    <div id="preloader">
+        <div class="loader-ring"></div>
+        <div class="loader-text">Gift Beauty &amp; Spa Zone</div>
+    </div>
+
+    <!-- ===== SCROLL PROGRESS ===== -->
+    <div id="scrollProgress"></div>
+
+    <!-- ===== AURORA BLOBS ===== -->
+    <div class="aurora" aria-hidden="true">
+        <span></span><span></span><span></span><span></span>
+    </div>
+
+    <!-- ===== FIREFLIES ===== -->
+    <div class="fireflies" id="fireflies" aria-hidden="true"></div>
+
+    <!-- ===== FILM GRAIN ===== -->
+    <div class="grain" aria-hidden="true"></div>
+
+    <!-- ===== CUSTOM CURSOR ===== -->
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+    <!-- Flashing Ticker Bar -->
+    <div class="promo-ticker">
+        <div class="ticker-track">
+            ✨ GIFT BEAUTY AND SPA ZONE • 24/7 LUXURY SPA IN LEKKI PHASE 1 • BOOK SWEDISH, HOT STONE &amp; FACIALS NOW ✨ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            ✨ GIFT BEAUTY AND SPA ZONE • 24/7 LUXURY SPA IN LEKKI PHASE 1 • BOOK SWEDISH, HOT STONE &amp; FACIALS NOW ✨
+        </div>
+    </div>
+
+    <!-- Top Contact Bar -->
+    <div class="top-bar">
+        <span><i class="fa-solid fa-location-dot" style="color: var(--gold);"></i> No 13 Prince Bode Adebowale Crescent, Lekki Phase 1, Lagos</span>
+        <span><i class="fa-solid fa-phone" style="color: var(--gold);"></i> <a href="tel:+2349053224196">0905 322 4196</a> • Open 24/7</span>
+    </div>
+
+    <!-- Header Navigation -->
+    <header id="navbar">
+        <a href="index.html" class="logo-container">
+            <img src="logo.png" alt="Gift Beauty Logo" class="logo-badge-img">
+            <div class="logo-text">
+                Gift Beauty
+                <span>&amp; Spa Zone</span>
+            </div>
+        </a>
+
+        <div style="position: relative;">
+            <button class="hamburger-btn" id="menuToggleBtn" onclick="toggleMenu()" aria-label="Open menu">
+                <i class="fa-solid fa-bars" id="hamburgerIcon"></i>
+            </button>
+            <div class="nav-dropdown" id="navDropdown">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home Index</a>
+                <a href="price.html"><i class="fa-solid fa-tag"></i> Price List</a>
+                <a href="gallery.html"><i class="fa-solid fa-images"></i> Gallery</a>
+                <a href="contact.html"><i class="fa-solid fa-headset"></i> Contact Us</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="sparkles" id="sparkleLayer"></div>
+        <div class="page-header-content reveal" id="headerParallax">
+            <h1>Signature Gallery</h1>
+            <p>Step inside our world of luxury — meet the vision behind Gift Beauty and Spa Zone, and preview the treatments and sanctuary that await you.</p>
+            <div class="gold-line"></div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         HERO MORPHING SLIDER
+         ============================================ -->
+    <section class="gallery-slider-section reveal">
+        <div class="section-head">
+            <h2>Featured Experiences</h2>
+            <p>Tap any image to expand</p>
+        </div>
+
+        <div class="slider-container" id="sliderContainer">
+
+            <div class="slide-item active">
+                <div class="slide-media">
+                    <img src="owner-portrait.png" alt="The Owner of Gift Beauty and Spa Zone">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">The Visionary &amp; Owner</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="facial-treatment-1.png" alt="Facial Glow Treatment">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Facial Glow Treatment</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="facial-treatment-2.png" alt="Derma-planing Facial">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Derma-planing Session</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="facial-treatment-3.png" alt="Hydra Glow Infusion">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Hydra Glow Infusion</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="facial-treatment-4.png" alt="Deep Pore Cleansing">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Deep Pore Cleansing</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="spa-ambiance-1.png" alt="Luxury Spa Suite">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Luxury Sanctuary Suite</div>
+            </div>
+
+            <div class="slide-item">
+                <div class="slide-media">
+                    <img src="spa-ambiance-2.png" alt="Relaxation Lounge">
+                    <button class="slide-expand" aria-label="Expand image"><i class="fa-solid fa-expand"></i></button>
+                </div>
+                <div class="slide-caption">Relaxation &amp; Ambiance</div>
+            </div>
+
+        </div>
+
+        <!-- Progress -->
+        <div class="slider-progress-track">
+            <div class="slider-progress run" id="sliderProgress"></div>
+        </div>
+
+        <!-- Controls -->
+        <div class="slider-controls">
+            <button class="slider-btn" onclick="prevSlide()" aria-label="Previous image"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="slider-counter"><b id="counterCurrent">01</b> / <span id="counterTotal">07</span></div>
+            <button class="slider-btn" onclick="nextSlide()" aria-label="Next image"><i class="fa-solid fa-chevron-right"></i></button>
+        </div>
+
+        <!-- Dots -->
+        <div class="slider-dots" id="sliderDots"></div>
+
+        <!-- Thumbnails -->
+        <div class="thumb-strip" id="thumbStrip"></div>
+    </section>
+
+    <!-- ============================================
+         MASONRY GRID GALLERY
+         ============================================ -->
+    <section class="gallery-grid-section" id="gridSection">
+        <div class="section-head reveal">
+            <h2>Full Collection</h2>
+            <p>Browse our complete gallery</p>
+        </div>
+
+        <div class="filter-bar reveal" id="filterBar">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="owner">The Owner</button>
+            <button class="filter-btn" data-filter="facial">Facials</button>
+            <button class="filter-btn" data-filter="ambiance">Ambiance</button>
+        </div>
+
+        <div class="masonry reveal" id="masonry">
+
+            <div class="grid-card" data-category="owner" data-index="0">
+                <img src="owner-portrait.png" alt="The Visionary and Owner" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>The Visionary &amp; Owner</h4>
+                    <span>Meet The Founder</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="facial" data-index="1">
+                <img src="facial-treatment-1.png" alt="Facial Glow Treatment" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Facial Glow Treatment</h4>
+                    <span>Signature Facial</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="facial" data-index="2">
+                <img src="facial-treatment-2.png" alt="Derma-planing Session" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Derma-planing Session</h4>
+                    <span>Skin Renewal</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="ambiance" data-index="5">
+                <img src="spa-ambiance-1.png" alt="Luxury Sanctuary Suite" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Luxury Sanctuary Suite</h4>
+                    <span>Private Room</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="facial" data-index="3">
+                <img src="facial-treatment-3.png" alt="Hydra Glow Infusion" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Hydra Glow Infusion</h4>
+                    <span>Deep Hydration</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="facial" data-index="4">
+                <img src="facial-treatment-4.png" alt="Deep Pore Cleansing" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Deep Pore Cleansing</h4>
+                    <span>Purifying Care</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+            <div class="grid-card" data-category="ambiance" data-index="6">
+                <img src="spa-ambiance-2.png" alt="Relaxation and Ambiance" loading="lazy">
+                <div class="grid-overlay">
+                    <h4>Relaxation &amp; Ambiance</h4>
+                    <span>Unwind In Style</span>
+                </div>
+                <div class="grid-zoom-badge"><i class="fa-solid fa-expand"></i></div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ============================================
+         LIGHTBOX
+         ============================================ -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+        <button class="lb-btn lb-close" id="lbClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+        <button class="lb-btn lb-prev" id="lbPrev" aria-label="Previous"><i class="fa-solid fa-chevron-left"></i></button>
+        <button class="lb-btn lb-next" id="lbNext" aria-label="Next"><i class="fa-solid fa-chevron-right"></i></button>
+
+        <div class="lb-img-wrap" id="lbWrap">
+            <img id="lbImage" src="" alt="">
+            <div class="lb-caption" id="lbCaption"></div>
+            <div class="lb-counter" id="lbCounter"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Gift Beauty and Spa Zone. All rights reserved.</p>
+    </footer>
+
+    <!-- Back to top -->
+    <button id="backToTop" aria-label="Back to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- Sticky Bottom Bar -->
+    <div class="bottom-bar">
+        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty%20and%20Spa%20Zone%20%E2%9C%A8,%20I%20have%20an%20enquiry." target="_blank" rel="noopener">
+            <i class="fa-brands fa-whatsapp"></i>
+            WhatsApp
+        </a>
+        <a href="tel:+2349053224196">
+            <i class="fa-solid fa-phone"></i>
+            Call Us
+        </a>
+        <a href="https://wa.me/2349053224196?text=Hello%20Gift%20Beauty%20and%20Spa%20Zone%20%E2%9C%A8,%20I%20would%20like%20to%20book%20an%20appointment." class="bottom-book-btn" target="_blank" rel="noopener">
+            <i class="fa-solid fa-calendar-check"></i>
+            Book Now
+        </a>
+    </div>
+
+    <script>
+    /* =========================================================
+       0. SPARKLE PARTICLES IN HEADER
+       ========================================================= */
+    (function buildSparkles() {
+        const layer = document.getElementById('sparkleLayer');
+        if (!layer) return;
+        for (let i = 0; i < 28; i++) {
+            const s = document.createElement('span');
+            const size = 2 + Math.random() * 3.5;
+            s.style.left = (Math.random() * 100) + '%';
+            s.style.top = (Math.random() * 100) + '%';
+            s.style.width = size + 'px';
+            s.style.height = size + 'px';
+            s.style.animationDelay = (Math.random() * 7).toFixed(2) + 's';
+            s.style.animationDuration = (4.5 + Math.random() * 5).toFixed(2) + 's';
+            layer.appendChild(s);
+        }
+    })();
+
+    /* =========================================================
+       1. HAMBURGER MENU
+       ========================================================= */
+    function toggleMenu() {
+        const dropdown = document.getElementById('navDropdown');
+        const icon = document.getElementById('hamburgerIcon');
+        dropdown.classList.toggle('active');
+        const open = dropdown.classList.contains('active');
+        icon.classList.toggle('fa-bars', !open);
+        icon.classList.toggle('fa-xmark', open);
+    }
+
+    window.addEventListener('click', function (e) {
+        const dropdown = document.getElementById('navDropdown');
+        const btn = document.getElementById('menuToggleBtn');
+        const icon = document.getElementById('hamburgerIcon');
+        if (!dropdown.contains(e.target) && !btn.contains(e.target)) {
+            dropdown.classList.remove('active');
+            icon.classList.remove('fa-xmark');
+            icon.classList.add('fa-bars');
+        }
+    });
+
+    /* =========================================================
+       2. SCROLL REVEAL
+       ========================================================= */
+    (function initReveal() {
+        const els = document.querySelectorAll('.reveal');
+        if (!('IntersectionObserver' in window)) {
+            els.forEach(el => el.classList.add('active'));
+            return;
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    obs.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+        els.forEach(el => obs.observe(el));
+    })();
+
+    /* =========================================================
+       3. SLIDER
+       ========================================================= */
+    const slides = Array.from(document.querySelectorAll('.slide-item'));
+    const totalSlides = slides.length;
+    const dotsWrap = document.getElementById('sliderDots');
+    const thumbStrip = document.getElementById('thumbStrip');
+    const progressEl = document.getElementById('sliderProgress');
+    const counterCurrent = document.getElementById('counterCurrent');
+    const counterTotal = document.getElementById('counterTotal');
+    const sliderContainer = document.getElementById('sliderContainer');
+
+    const captions = [
+        'The Visionary & Owner',
+        'Facial Glow Treatment',
+        'Derma-planing Session',
+        'Hydra Glow Infusion',
+        'Deep Pore Cleansing',
+        'Luxury Sanctuary Suite',
+        'Relaxation & Ambiance'
+    ];
+
+    const DELAY = 5000;
+    let currentIdx = 0;
+    let autoTimer = null;
+    let autoStart = 0;
+    let remaining = DELAY;
+
+    /* Build dots + thumbnails */
+    slides.forEach((slide, i) => {
+        const img = slide.querySelector('img');
+
+        const dot = document.createElement('button');
+        dot.className = 'dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('aria-label', 'Go to image ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+
+        const thumb = document.createElement('button');
+        thumb.className = 'thumb' + (i === 0 ? ' active' : '');
+        thumb.setAttribute('aria-label', 'View ' + (captions[i] || 'image'));
+        thumb.innerHTML = '<img src="' + img.getAttribute('src') + '" alt="" loading="lazy">';
+        thumb.addEventListener('click', () => goTo(i));
+        thumbStrip.appendChild(thumb);
+    });
+
+    const dots = Array.from(dotsWrap.children);
+    const thumbs = Array.from(thumbStrip.children);
+
+    if (counterTotal) counterTotal.textContent = String(totalSlides).padStart(2, '0');
+
+    function render() {
+        slides.forEach((s, i) => {
+            s.classList.remove('active', 'prev', 'next');
+            if (i === currentIdx) {
+                s.classList.add('active');
+            } else if (i === (currentIdx - 1 + totalSlides) % totalSlides) {
+                s.classList.add('prev');
+            } else if (i === (currentIdx + 1) % totalSlides) {
+                s.classList.add('next');
+            }
+        });
+
+        dots.forEach((d, i) => d.classList.toggle('active', i === currentIdx));
+        thumbs.forEach((t, i) => {
+            t.classList.toggle('active', i === currentIdx);
+        });
+
+        if (counterCurrent) counterCurrent.textContent = String(currentIdx + 1).padStart(2, '0');
+
+        // keep active thumbnail in view
+        const activeThumb = thumbs[currentIdx];
+        if (activeThumb && thumbStrip) {
+            const target = activeThumb.offsetLeft - thumbStrip.clientWidth / 2 + activeThumb.clientWidth / 2;
+            thumbStrip.scrollTo({ left: target, behavior: 'smooth' });
+        }
+    }
+
+    function restartProgress() {
+        if (!progressEl) return;
+        progressEl.classList.remove('run', 'paused');
+        void progressEl.offsetWidth; // force reflow
+        progressEl.style.animationDuration = DELAY + 'ms';
+        progressEl.classList.add('run');
+    }
+
+    function scheduleAuto() {
+        clearTimeout(autoTimer);
+        remaining = DELAY;
+        autoStart = Date.now();
+        autoTimer = setTimeout(() => goTo(currentIdx + 1), DELAY);
+        restartProgress();
+    }
+
+    function goTo(index) {
+        currentIdx = ((index % totalSlides) + totalSlides) % totalSlides;
+        render();
+        scheduleAuto();
+    }
+
+    function nextSlide() { goTo(currentIdx + 1); }
+    function prevSlide() { goTo(currentIdx - 1); }
+
+    function pauseAuto() {
+        if (!autoTimer) return;
+        clearTimeout(autoTimer);
+        autoTimer = null;
+        remaining = Math.max(400, DELAY - (Date.now() - autoStart));
+        if (progressEl) progressEl.classList.add('paused');
+    }
+
+    function resumeAuto() {
+        if (autoTimer) return;
+        if (progressEl) progressEl.classList.remove('paused');
+        autoStart = Date.now();
+        autoTimer = setTimeout(() => goTo(currentIdx + 1), remaining);
+    }
+
+    /* Pause on hover (desktop) */
+    if (window.matchMedia('(hover: hover)').matches) {
+        sliderContainer.addEventListener('mouseenter', pauseAuto);
+        sliderContainer.addEventListener('mouseleave', resumeAuto);
+    }
+
+    /* Pause when tab hidden */
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) pauseAuto();
+        else if (!lightbox.classList.contains('open')) resumeAuto();
+    });
+
+    /* Swipe support */
+    let touchStartX = 0, touchStartY = 0, touchActive = false;
+    sliderContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.touches[0].clientX;
+        touchStartY = e.touches[0].clientY;
+        touchActive = true;
+        pauseAuto();
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', (e) => {
+        if (!touchActive) return;
+        touchActive = false;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        const dy = e.changedTouches[0].clientY - touchStartY;
+        if (Math.abs(dx) > 45 && Math.abs(dx) > Math.abs(dy)) {
+            dx > 0 ? prevSlide() : nextSlide();
+        } else {
+            resumeAuto();
+        }
+    }, { passive: true });
+
+    /* Click on a side slide to navigate */
+    slides.forEach((slide, i) => {
+        slide.addEventListener('click', (e) => {
+            if (e.target.closest('.slide-expand')) return;
+            if (i !== currentIdx) goTo(i);
+        });
+    });
+
+    /* Init */
+    render();
+    scheduleAuto();
+
+    /* =========================================================
+       4. EXPAND BUTTONS -> LIGHTBOX
+       ========================================================= */
+    document.querySelectorAll('.slide-expand').forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLightbox(currentIdx);
+        });
+    });
+
+    /* =========================================================
+       5. GRID FILTER
+       ========================================================= */
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const gridCards = Array.from(document.querySelectorAll('.grid-card'));
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            filterBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            const filter = btn.dataset.filter;
+            gridCards.forEach(card => {
+                const show = filter === 'all' || card.dataset.category === filter;
+                card.classList.toggle('hide', !show);
+                card.classList.add('card-in');
+                if (show) {
+                    card.animate(
+                        [
+                            { opacity: 0, transform: 'scale(0.94) translateY(14px)' },
+                            { opacity: 1, transform: 'scale(1) translateY(0)' }
+                        ],
+                        { duration: 480, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'both' }
+                    );
+                }
+            });
+        });
+    });
+
+    /* =========================================================
+       6. TILT EFFECT ON GRID CARDS (desktop only)
+       ========================================================= */
+    if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        gridCards.forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const r = card.getBoundingClientRect();
+                const x = (e.clientX - r.left) / r.width - 0.5;
+                const y = (e.clientY - r.top) / r.height - 0.5;
+                card.style.transform =
+                    `perspective(900px) rotateY(${(x * 9).toFixed(2)}deg) rotateX(${(-y * 9).toFixed(2)}deg) translateY(-4px) scale(1.015)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = '';
+            });
+        });
+    }
+
+    /* =========================================================
+       7. LIGHTBOX
+       ========================================================= */
+    const lightbox = document.getElementById('lightbox');
+    const lbImage = document.getElementById('lbImage');
+    const lbCaption = document.getElementById('lbCaption');
+    const lbCounter = document.getElementById('lbCounter');
+    const lbClose = document.getElementById('lbClose');
+    const lbPrev = document.getElementById('lbPrev');
+    const lbNext = document.getElementById('lbNext');
+
+    let lbIndex = 0;
+
+    function openLightbox(index) {
+        lbIndex = index;
+        updateLightbox();
+        lightbox.classList.add('open');
+        document.body.style.overflow = 'hidden';
+        pauseAuto();
+        lbBurst();
+    }
+
+    function closeLightbox() {
+        lightbox.classList.remove('open');
+        document.body.style.overflow = '';
+        if (!document.hidden) resumeAuto();
+    }
+
+    function updateLightbox() {
+        const slide = slides[lbIndex];
+        const img = slide.querySelector('img');
+        lbImage.style.animation = 'none';
+        void lbImage.offsetWidth;
+        lbImage.style.animation = '';
+        lbImage.src = img.getAttribute('src');
+        lbImage.alt = img.getAttribute('alt') || captions[lbIndex];
+        lbCaption.textContent = captions[lbIndex] || '';
+        lbCounter.textContent = String(lbIndex + 1).padStart(2, '0') + ' / ' + String(totalSlides).padStart(2, '0');
+    }
+
+    function lbNextImg() { lbIndex = (lbIndex + 1) % totalSlides; updateLightbox(); }
+    function lbPrevImg() { lbIndex = (lbIndex - 1 + totalSlides) % totalSlides; updateLightbox(); }
+
+    lbClose.addEventListener('click', closeLightbox);
+    lbNext.addEventListener('click', lbNextImg);
+    lbPrev.addEventListener('click', lbPrevImg);
+
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) closeLightbox();
+    });
+
+    /* Open lightbox from grid */
+    gridCards.forEach(card => {
+        card.addEventListener('click', () => {
+            openLightbox(parseInt(card.dataset.index, 10) || 0);
+        });
+    });
+
+    /* Lightbox swipe */
+    let lbTouchX = 0;
+    lightbox.addEventListener('touchstart', (e) => {
+        lbTouchX = e.touches[0].clientX;
+    }, { passive: true });
+    lightbox.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - lbTouchX;
+        if (Math.abs(dx) > 50) {
+            dx > 0 ? lbPrevImg() : lbNextImg();
+        }
+    }, { passive: true });
+
+    /* Keyboard navigation */
+    document.addEventListener('keydown', (e) => {
+        if (lightbox.classList.contains('open')) {
+            if (e.key === 'Escape') closeLightbox();
+            if (e.key === 'ArrowRight') lbNextImg();
+            if (e.key === 'ArrowLeft') lbPrevImg();
+        } else {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+        }
+    });
+
+    /* =========================================================
+       8. SMOOTH ANCHOR / NAVBAR SHRINK ON SCROLL
+       ========================================================= */
+    window.addEventListener('scroll', () => {
+        const header = document.getElementById('navbar');
+        if (!header) return;
+        if (window.scrollY > 40) {
+            header.style.padding = '10px 5%';
+            header.style.background = 'rgba(7, 5, 4, 0.98)';
+        } else {
+            header.style.padding = '15px 5%';
+            header.style.background = 'rgba(7, 5, 4, 0.9)';
+        }
+    }, { passive: true });
+
+    /* ============================================================
+       ★★★  EXTRA EFFECT ENGINE  ★★★
+       ============================================================ */
+
+    /* ---------- 9. PRELOADER ---------- */
+    (function preloader() {
+        const pre = document.getElementById('preloader');
+        if (!pre) return;
+        const finish = () => setTimeout(() => pre.classList.add('done'), 700);
+        if (document.readyState === 'complete') finish();
+        else window.addEventListener('load', finish);
+        // safety net
+        setTimeout(() => pre.classList.add('done'), 4000);
+    })();
+
+    /* ---------- 10. SCROLL PROGRESS BAR ---------- */
+    (function scrollProgressBar() {
+        const bar = document.getElementById('scrollProgress');
+        if (!bar) return;
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const h = document.documentElement.scrollHeight - window.innerHeight;
+                const pct = h > 0 ? (window.scrollY / h) * 100 : 0;
+                bar.style.width = pct.toFixed(2) + '%';
+                ticking = false;
+            });
+        }, { passive: true });
+    })();
+
+    /* ---------- 11. FIREFLIES ---------- */
+    (function fireflies() {
+        const layer = document.getElementById('fireflies');
+        if (!layer) return;
+        const count = window.innerWidth < 700 ? 12 : 22;
+        for (let i = 0; i < count; i++) {
+            const f = document.createElement('span');
+            f.className = 'firefly';
+            f.style.left = (Math.random() * 100) + '%';
+            f.style.top = (60 + Math.random() * 45) + '%';
+            f.style.animationDuration = (9 + Math.random() * 11).toFixed(2) + 's';
+            f.style.animationDelay = (-Math.random() * 16).toFixed(2) + 's';
+            const sc = 0.6 + Math.random() * 1.1;
+            f.style.width = (3 * sc).toFixed(1) + 'px';
+            f.style.height = (3 * sc).toFixed(1) + 'px';
+            layer.appendChild(f);
+        }
+    })();
+
+    /* ---------- 12. CUSTOM CURSOR + SPARKLE TRAIL ---------- */
+    (function customCursor() {
+        const fine = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+        if (!fine) return;
+
+        const dot = document.getElementById('cursorDot');
+        const ring = document.getElementById('cursorRing');
+        if (!dot || !ring) return;
+
+        document.body.classList.add('custom-cursor');
+
+        let mx = window.innerWidth / 2, my = window.innerHeight / 2;
+        let rx = mx, ry = my;
+        let lastSpark = 0;
+
+        window.addEventListener('mousemove', (e) => {
+            mx = e.clientX;
+            my = e.clientY;
+            dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+
+            // sparkle trail
+            const now = performance.now();
+            if (now - lastSpark > 46) {
+                lastSpark = now;
+                spawnSpark(mx, my);
+            }
+        }, { passive: true });
+
+        function spawnSpark(x, y) {
+            const s = document.createElement('div');
+            s.className = 'trail-spark';
+            const size = 4 + Math.random() * 7;
+            s.style.width = size + 'px';
+            s.style.height = size + 'px';
+            s.style.left = (x + (Math.random() * 18 - 9)) + 'px';
+            s.style.top = (y + (Math.random() * 18 - 9)) + 'px';
+            document.body.appendChild(s);
+            setTimeout(() => s.remove(), 800);
+        }
+
+        function loop() {
+            rx += (mx - rx) * 0.16;
+            ry += (my - ry) * 0.16;
+            ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+            requestAnimationFrame(loop);
+        }
+        loop();
+
+        // grow on interactive elements
+        document.addEventListener('mouseover', (e) => {
+            const t = e.target.closest('a, button, .grid-card, .thumb, .dot, .filter-btn');
+            ring.classList.toggle('grow', !!t);
+        });
+
+        document.addEventListener('mouseleave', () => {
+            dot.style.opacity = '0';
+            ring.style.opacity = '0';
+        });
+        document.addEventListener('mouseenter', () => {
+            dot.style.opacity = '1';
+            ring.style.opacity = '1';
+        });
+    })();
+
+    /* ---------- 13. CLICK RIPPLE ON BUTTONS ---------- */
+    (function rippleEngine() {
+        document.addEventListener('pointerdown', (e) => {
+            const host = e.target.closest('button, .filter-btn, .bottom-bar a, .dev-website-btn, .thumb, .dot');
+            if (!host) return;
+            if (host.classList.contains('ripple-host') === false) {
+                host.classList.add('ripple-host');
+            }
+            const r = host.getBoundingClientRect();
+            const size = Math.max(r.width, r.height);
+            const rip = document.createElement('span');
+            rip.className = 'ripple';
+            rip.style.width = size + 'px';
+            rip.style.height = size + 'px';
+            rip.style.left = (e.clientX - r.left - size / 2) + 'px';
+            rip.style.top = (e.clientY - r.top - size / 2) + 'px';
+            host.appendChild(rip);
+            setTimeout(() => rip.remove(), 750);
+        });
+    })();
+
+    /* ---------- 14. MAGNETIC BUTTONS ---------- */
+    (function magnetic() {
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+        const targets = document.querySelectorAll('.slider-btn, .hamburger-btn, .bottom-book-btn, #backToTop');
+        targets.forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const r = el.getBoundingClientRect();
+                const x = e.clientX - r.left - r.width / 2;
+                const y = e.clientY - r.top - r.height / 2;
+                el.style.transform = `translate(${(x * 0.28).toFixed(2)}px, ${(y * 0.28).toFixed(2)}px) scale(1.09)`;
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+    })();
+
+    /* ---------- 15. PARALLAX ON PAGE HEADER ---------- */
+    (function headerParallax() {
+        const el = document.getElementById('headerParallax');
+        const layer = document.getElementById('sparkleLayer');
+        if (!el) return;
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(() => {
+                const y = window.scrollY;
+                if (y < 700) {
+                    el.style.transform = `translateY(${(y * 0.28).toFixed(1)}px)`;
+                    el.style.opacity = Math.max(0, 1 - y / 620).toFixed(2);
+                    if (layer) layer.style.transform = `translateY(${(y * 0.15).toFixed(1)}px)`;
+                }
+                ticking = false;
+            });
+        }, { passive: true });
+    })();
+
+    /* ---------- 16. GRID CARD STAGGER REVEAL ---------- */
+    (function cardStagger() {
+        const cards = Array.from(document.querySelectorAll('.grid-card'));
+        if (!cards.length) return;
+        if (!('IntersectionObserver' in window)) {
+            cards.forEach(c => c.classList.add('card-in'));
+            return;
+        }
+        const obs = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const idx = cards.indexOf(el);
+                    el.style.transitionDelay = ((idx % 4) * 80) + 'ms';
+                    el.classList.add('card-in');
+                    setTimeout(() => { el.style.transitionDelay = ''; }, 900);
+                    obs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        cards.forEach(c => obs.observe(c));
+    })();
+
+    /* ---------- 17. LIGHTBOX GOLD BURST ---------- */
+    function lbBurst() {
+        const N = window.innerWidth < 700 ? 14 : 26;
+        const cx = window.innerWidth / 2;
+        const cy = window.innerHeight / 2;
+        for (let i = 0; i < N; i++) {
+            const p = document.createElement('div');
+            p.className = 'lb-burst';
+            p.style.left = cx + 'px';
+            p.style.top = cy + 'px';
+            const size = 4 + Math.random() * 8;
+            p.style.width = size + 'px';
+            p.style.height = size + 'px';
+            document.body.appendChild(p);
+
+            const angle = Math.random() * Math.PI * 2;
+            const dist = 120 + Math.random() * 260;
+
+            p.animate([
+                { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+                {
+                    transform: `translate(calc(-50% + ${Math.cos(angle) * dist}px), calc(-50% + ${Math.sin(angle) * dist}px)) scale(0)`,
+                    opacity: 0
+                }
+            ], {
+                duration: 900 + Math.random() * 500,
+                easing: 'cubic-bezier(0.16,1,0.3,1)',
+                fill: 'forwards'
+            }).onfinish = () => p.remove();
+        }
+    }
+
+    /* ---------- 18. LIGHTBOX 3D TILT ---------- */
+    (function lightboxTilt() {
+        const wrap = document.getElementById('lbWrap');
+        if (!wrap) return;
+        if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+        lightbox.addEventListener('mousemove', (e) => {
+            if (!lightbox.classList.contains('open')) return;
+            const x = (e.clientX / window.innerWidth - 0.5) * 2;
+            const y = (e.clientY / window.innerHeight - 0.5) * 2;
+            wrap.style.transform =
+                `perspective(1200px) rotateY(${(x * 6).toFixed(2)}deg) rotateX(${(-y * 6).toFixed(2)}deg) scale(1)`;
+        });
+
+        lightbox.addEventListener('mouseleave', () => {
+            wrap.style.transform = '';
+        });
+    })();
+
+    /* ---------- 19. BACK TO TOP ---------- */
+    (function backToTop() {
+        const btn = document.getElementById('backToTop');
+        if (!btn) return;
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('show', window.scrollY > 500);
+        }, { passive: true });
+        btn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    })();
+
+    /* ---------- 20. FILTER CLICK SPARKLE BURST ---------- */
+    (function filterBurst() {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const r = btn.getBoundingClientRect();
+                const cx = r.left + r.width / 2;
+                const cy = r.top + r.height / 2;
+                for (let i = 0; i < 10; i++) {
+                    const s = document.createElement('div');
+                    s.className = 'trail-spark';
+                    s.style.left = cx + 'px';
+                    s.style.top = cy + 'px';
+                    const size = 4 + Math.random() * 6;
+                    s.style.width = size + 'px';
+                    s.style.height = size + 'px';
+                    document.body.appendChild(s);
+                    const a = Math.random() * Math.PI * 2;
+                    const d = 30 + Math.random() * 70;
+                    s.animate([
+                        { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+                        {
+                            transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d}px)) scale(0)`,
+                            opacity: 0
+                        }
+                    ], { duration: 620, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'forwards' })
+                     .onfinish = () => s.remove();
+                }
+            });
+        });
+    })();
+
+    /* ---------- 21. TAP SPARKLE ON TOUCH DEVICES ---------- */
+    (function touchSparkle() {
+        if (window.matchMedia('(hover: hover)').matches) return;
+        document.addEventListener('touchstart', (e) => {
+            const t = e.touches[0];
+            if (!t) return;
+            for (let i = 0; i < 6; i++) {
+                const s = document.createElement('div');
+                s.className = 'trail-spark';
+                s.style.left = t.clientX + 'px';
+                s.style.top = t.clientY + 'px';
+                const size = 4 + Math.random() * 6;
+                s.style.width = size + 'px';
+                s.style.height = size + 'px';
+                document.body.appendChild(s);
+                const a = Math.random() * Math.PI * 2;
+                const d = 20 + Math.random() * 50;
+                s.animate([
+                    { transform: 'translate(-50%,-50%) scale(1)', opacity: 1 },
+                    {
+                        transform: `translate(calc(-50% + ${Math.cos(a) * d}px), calc(-50% + ${Math.sin(a) * d}px)) scale(0)`,
+                        opacity: 0
+                    }
+                ], { duration: 650, easing: 'cubic-bezier(0.16,1,0.3,1)', fill: 'forwards' })
+                 .onfinish = () => s.remove();
+            }
+        }, { passive: true });
+    })();
+
+    /* ---------- 22. BOTTOM BAR ICON BOUNCE ---------- */
+    (function bottomBarBounce() {
+        document.querySelectorAll('.bottom-bar a').forEach(a => {
+            a.addEventListener('mouseenter', () => {
+                const icon = a.querySelector('i');
+                if (!icon) return;
+                icon.animate([
+                    { transform: 'translateY(0) scale(1)' },
+                    { transform: 'translateY(-7px) scale(1.2)' },
+                    { transform: 'translateY(0) scale(1)' }
+                ], { duration: 480, easing: 'cubic-bezier(0.34,1.4,0.5,1)' });
+            });
+        });
+    })();
+    </script>
+</body>
+</html>
